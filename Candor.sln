@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candor.Web", "Candor.Web\Ca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candor.DataAccess", "Candor.DataAccess\Candor.DataAccess.csproj", "{6A96BADB-2F46-4780-9591-2A14589C5B1C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candor.Domain", "Candor.Domain\Candor.Domain.csproj", "{F5B944A9-424F-454A-8B83-25A49B874B51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6A96BADB-2F46-4780-9591-2A14589C5B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A96BADB-2F46-4780-9591-2A14589C5B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A96BADB-2F46-4780-9591-2A14589C5B1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B944A9-424F-454A-8B83-25A49B874B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B944A9-424F-454A-8B83-25A49B874B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B944A9-424F-454A-8B83-25A49B874B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B944A9-424F-454A-8B83-25A49B874B51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
