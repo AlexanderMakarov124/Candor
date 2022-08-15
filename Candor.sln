@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candor.Web", "Candor.Web\Candor.Web.csproj", "{CBE32D41-E314-4F1D-AA73-D1E5B4C9F2A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candor.DataAccess", "Candor.DataAccess\Candor.DataAccess.csproj", "{6A96BADB-2F46-4780-9591-2A14589C5B1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CBE32D41-E314-4F1D-AA73-D1E5B4C9F2A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBE32D41-E314-4F1D-AA73-D1E5B4C9F2A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBE32D41-E314-4F1D-AA73-D1E5B4C9F2A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A96BADB-2F46-4780-9591-2A14589C5B1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A96BADB-2F46-4780-9591-2A14589C5B1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A96BADB-2F46-4780-9591-2A14589C5B1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A96BADB-2F46-4780-9591-2A14589C5B1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
