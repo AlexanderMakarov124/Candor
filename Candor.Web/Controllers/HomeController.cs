@@ -1,6 +1,6 @@
-﻿using Candor.Web.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Candor.Web.ViewModels;
 
 namespace Candor.Web.Controllers;
 public class HomeController : Controller

@@ -1,0 +1,15 @@
+﻿@model Candor.Web.ViewModels.RegistrationViewModel
+
+<div class="d-flex align-items-center justify-content-center">
+    <form method="post" asp-action="Register">
+        <label asp-for="UserName"></label>
+        <input class="form-control" type="text" value="TestUserName" asp-for="UserName" />
+        <label asp-for="Name">Name</label>
+        <input class="form-control" type="text" value="TestName" asp-for="Name" />
+        <label asp-for="Email">Email</label>
+        <input class="form-control" type="email" value="TestEmail@gmail.com" asp-for="Email" />
+        <label asp-for="Password">Password</label>
+        <input class="form-control" type="password" value="TestPassword" asp-for="Password" />
+        <button class="form-control" type="submit">Sign up</button>
+    </form>
+</div>

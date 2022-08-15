@@ -1,5 +1,8 @@
 using Candor.DataAccess;
 using Candor.Domain.Models;
+using Candor.UseCases.Authorization.Register;
+using Candor.Web.MappingProfiles;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +16,9 @@ builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServe
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationContext>();
 
+builder.Services.AddMediatR(typeof(RegisterCommand).Assembly);
 
+builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
 
 var app = builder.Build();
 

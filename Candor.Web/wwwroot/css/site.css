@@ -1,6 +1,11 @@
-html {
-  font-size: 14px;
+body {
+    font-size: 16px;
 }
+
+nav {
+  font-size: 20px;
+}
+
 
 @media (min-width: 768px) {
   html {
@@ -15,4 +20,10 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+.form-control {
+    width: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }

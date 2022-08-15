@@ -1,4 +1,4 @@
-namespace Candor.Web.Models;
+namespace Candor.Web.ViewModels;
 
 public class ErrorViewModel
 {
