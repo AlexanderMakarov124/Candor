@@ -1,4 +1,5 @@
-﻿using Candor.Domain.Models;
+﻿using System.Security.Authentication;
+using Candor.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
@@ -14,8 +15,19 @@ internal class RegisterCommandHandler : AsyncRequestHandler<RegisterCommand>
         this.signInManager = signInManager;
     }
 
-    protected override Task Handle(RegisterCommand request, CancellationToken cancellationToken)
+    protected override async Task Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        return Task.CompletedTask;
+        var createResult = await userManager.CreateAsync(request.User, request.Password);
+
+        if (createResult.Succeeded)
+        {
+            await signInManager.SignInAsync(request.User, false);
+        }
+        else
+        {
+            var errors = string.Join(", ", createResult.Errors.Select(error => error.Description));
+
+            throw new AuthenticationException(errors);
+        }
     }
 }

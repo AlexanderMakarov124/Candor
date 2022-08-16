@@ -27,3 +27,11 @@ body {
     margin-top: 5px;
     margin-bottom: 10px;
 }
+
+.errors {
+    margin-top: 20px;
+}
+
+.field-validation-error {
+    color: red;
+}

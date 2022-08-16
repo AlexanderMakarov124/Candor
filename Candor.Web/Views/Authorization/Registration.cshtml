@@ -1,15 +1,45 @@
 ﻿@model Candor.Web.ViewModels.RegistrationViewModel
 
+@{
+    var errors = (string[])ViewData["Errors"] ?? Array.Empty<string>();
+}
+
 <div class="d-flex align-items-center justify-content-center">
     <form method="post" asp-action="Register">
-        <label asp-for="UserName"></label>
-        <input class="form-control" type="text" value="TestUserName" asp-for="UserName" />
-        <label asp-for="Name">Name</label>
-        <input class="form-control" type="text" value="TestName" asp-for="Name" />
-        <label asp-for="Email">Email</label>
-        <input class="form-control" type="email" value="TestEmail@gmail.com" asp-for="Email" />
-        <label asp-for="Password">Password</label>
-        <input class="form-control" type="password" value="TestPassword" asp-for="Password" />
-        <button class="form-control" type="submit">Sign up</button>
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input class="form-control" type="text" value="TestUserName" asp-for="UserName" />
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input class="form-control" type="text" value="TestName" asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email">Email</label>
+            <input class="form-control" type="email" value="TestEmail@gmail.com" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password">Password</label>
+            <input class="form-control" type="password" value="TestPassword" asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Sign up</button>
+
+        @if (errors.Any())
+        {
+            <div class="errors">
+                @foreach (var error in errors)
+                {
+                <label>@error</label>
+                }
+            </div>
+        }
     </form>
 </div>

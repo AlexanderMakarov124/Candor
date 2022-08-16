@@ -1,0 +1,21 @@
+﻿@model Candor.Web.ViewModels.LoginViewModel
+
+<div class="d-flex align-items-center justify-content-center">
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input class="form-control" type="text" value="TestUserName" asp-for="UserName"/>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input class="form-control" type="password" value="TestPassword" asp-for="Password"/>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Sign in</button>
+        
+        <div class="errors">
+            <label>@ViewData["Error"]</label>
+        </div>
+    </form>
+</div>

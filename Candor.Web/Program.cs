@@ -13,7 +13,21 @@ builder.Services.AddControllersWithViews();
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
 
-builder.Services.AddIdentity<User, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+    {
+        options.Password.RequiredLength = 4;
+        options.Password.RequireNonAlphanumeric = false;   
+        options.Password.RequireLowercase = false; 
+        options.Password.RequireUppercase = false; 
+        options.Password.RequireDigit = false;
+
+        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+        options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Lockout.AllowedForNewUsers = true;
+
+        options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+        options.User.RequireUniqueEmail = false;
+    })
     .AddEntityFrameworkStores<ApplicationContext>();
 
 builder.Services.AddMediatR(typeof(RegisterCommand).Assembly);
