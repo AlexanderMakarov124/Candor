@@ -1,4 +1,4 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿@if (User.Identity!.IsAuthenticated)
 {
     <li class="nav-item">
         <label>Hello @User.Identity.Name</label>

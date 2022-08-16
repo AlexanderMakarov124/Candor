@@ -5,6 +5,7 @@ using Candor.Web.MappingProfiles;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,9 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 builder.Services.AddMediatR(typeof(RegisterCommand).Assembly);
 
 builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
+
+builder.Logging.ClearProviders();
+builder.Host.UseNLog();
 
 var app = builder.Build();
 
