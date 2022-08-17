@@ -4,8 +4,14 @@ using Candor.Web.ViewModels;
 
 namespace Candor.Web.MappingProfiles;
 
+/// <summary>
+/// User mapping profile.
+/// </summary>
 public class UserMappingProfile : Profile
 {
+    /// <summary>
+    /// Constructor.
+    /// </summary>
     public UserMappingProfile()
     {
         CreateMap<RegistrationViewModel, User>();
