@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Candor.Domain.Models
+
+@inject UserManager<User> userManager
+
+<a asp-action="CreatePost">Create post</a>
+
+
+<div class="blog">
+    @foreach (var post in userManager.GetUserAsync(User).Result.Posts)
+    {
+        <h4>@post.Title Was created: @post.CreatedAt</h4>
+        <p>@post.Content</p>
+    }
+</div>

@@ -12,7 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Candor.DataAccess\Candor.DataAccess.csproj" />
     <ProjectReference Include="..\Candor.Domain\Candor.Domain.csproj" />
+    <ProjectReference Include="..\Candor.Infrastructure.Common\Candor.Infrastructure.Common.csproj" />
   </ItemGroup>
 
 </Project>

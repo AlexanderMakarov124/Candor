@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Candor.Web.ViewModels;
+namespace Candor.Web.ViewModels.Authorization;
 
 /// <summary>
 /// Login view model.

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Candor.Domain.Models;
-using Candor.Web.ViewModels;
+using Candor.Web.ViewModels.Authorization;
 
 namespace Candor.Web.MappingProfiles;
 

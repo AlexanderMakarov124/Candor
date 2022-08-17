@@ -4,7 +4,7 @@ using Candor.Domain.Models;
 using Candor.UseCases.Authorization.Login;
 using Candor.UseCases.Authorization.Logout;
 using Candor.UseCases.Authorization.Register;
-using Candor.Web.ViewModels;
+using Candor.Web.ViewModels.Authorization;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -16,4 +16,9 @@ public class ApplicationContext : IdentityDbContext<User>
     {
 
     }
+
+    /// <summary>
+    /// Posts DB set.
+    /// </summary>
+    public DbSet<Post> Posts { get; protected set; }
 }

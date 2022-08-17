@@ -1,0 +1,17 @@
+﻿@model Candor.UseCases.Blog.CreatePost.CreatePostCommand
+
+<div class="d-flex align-items-center justify-content-center">
+    <form method="post" asp-action="CreatePost">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input class="form-control" type="text" value="TestTitle" asp-for="Title" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Content"></label>
+            <textarea class="form-text" asp-for="Content">Test content test content test content test content.</textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Create blog</button>
+    </form>
+</div>
