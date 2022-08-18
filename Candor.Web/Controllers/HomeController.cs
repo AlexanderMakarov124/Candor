@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using AutoMapper;
+using Candor.UseCases.Blog.GetAllPosts;
 using Candor.Web.ViewModels;
+using MediatR;
 
 namespace Candor.Web.Controllers;
 
@@ -9,13 +12,27 @@ namespace Candor.Web.Controllers;
 /// </summary>
 public class HomeController : Controller
 {
+    private readonly IMediator mediator;
+    private readonly IMapper mapper;
+
+    /// <summary>
+    /// Constructor.
+    /// </summary>
+    public HomeController(IMediator mediator, IMapper mapper)
+    {
+        this.mediator = mediator;
+        this.mapper = mapper;
+    }
+
     /// <summary>
     /// Main page.
     /// </summary>
     /// <returns>View.</returns>
-    public IActionResult Index()
+    public async Task<IActionResult> IndexAsync(CancellationToken cancellationToken)
     {
-        return View();
+        var posts = await mediator.Send(new GetAllPostsQuery(), cancellationToken);
+
+        return View(posts.OrderByDescending(post => post.CreatedAt));
     }
         
     /// <summary>

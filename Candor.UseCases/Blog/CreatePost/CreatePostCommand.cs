@@ -1,4 +1,5 @@
-﻿using Candor.Domain.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using Candor.Domain.Models;
 using MediatR;
 
 namespace Candor.UseCases.Blog.CreatePost;
@@ -9,9 +10,11 @@ namespace Candor.UseCases.Blog.CreatePost;
 public record CreatePostCommand : IRequest
 {
     /// <inheritdoc cref="Post.Title"/>
+    [MaxLength(50)]
     public string? Title { get; init; }
 
     /// <inheritdoc cref="Post.Content"/>
+    [DataType(DataType.MultilineText)]
     public string? Content { get; init; }
 
     /// <inheritdoc cref="Post.UserId"/>

@@ -6,16 +6,14 @@
 
 @model IEnumerable<Post>
 
-<a asp-action="CreatePost">Create post</a>
-
 
 <div class="blog">
     @if (Model.Any())
     {
         foreach (var post in Model)
         {
-            <h4>@post.Title Was created: @post.CreatedAt</h4>
-            <p>@post.Content</p>
+            <h4>@post.Title Was created: @post.CreatedAt Author: @post.User.UserName</h4>
+            <p class="postContent">@post.Content</p>
         }
     }
     else
@@ -23,3 +21,5 @@
         <label>No posts here.</label>
     }
 </div>
+
+<a asp-action="CreatePost">Create post</a>

@@ -2,6 +2,7 @@
 using Candor.UseCases.Blog.CreatePost;
 using Candor.UseCases.Blog.GetCurrentUser;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Candor.Web.Controllers;
@@ -9,6 +10,7 @@ namespace Candor.Web.Controllers;
 /// <summary>
 /// Blog controller.
 /// </summary>
+[Authorize]
 public class BlogController : Controller
 {
     private readonly IMediator mediator;
@@ -32,7 +34,7 @@ public class BlogController : Controller
     {
         var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
-        return View(user.Posts);
+        return View(user.Posts.OrderByDescending(post => post.CreatedAt));
     }
 
     /// <summary>

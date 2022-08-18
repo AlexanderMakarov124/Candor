@@ -35,3 +35,7 @@ body {
 .field-validation-error {
     color: red;
 }
+
+.postContent {
+    white-space: pre-wrap;
+}

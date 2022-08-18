@@ -47,7 +47,7 @@ namespace Candor.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Candor.Domain.Models.User", b =>

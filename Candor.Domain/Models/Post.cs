@@ -26,7 +26,12 @@ public class Post
     public DateTime CreatedAt { get; init; }
 
     /// <summary>
+    /// User who owns the blog post.
+    /// </summary>
+    public virtual User User { get; init; }
+
+    /// <summary>
     /// Id of user who owns the blog post.
     /// </summary>
-    public string UserId { get; init; }
+    public virtual string UserId { get; init; }
 }
