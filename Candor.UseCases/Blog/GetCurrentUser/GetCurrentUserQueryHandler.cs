@@ -1,5 +1,5 @@
 ﻿using Candor.Domain.Models;
-using Candor.Infrastructure.Common;
+using Candor.Infrastructure.Common.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;

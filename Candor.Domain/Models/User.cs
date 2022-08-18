@@ -10,5 +10,5 @@ public class User : IdentityUser
     /// <summary>
     /// All posts made by a user.
     /// </summary>
-    public IEnumerable<Post> Posts { get; init; }
+    public virtual IEnumerable<Post> Posts { get; init; }
 }

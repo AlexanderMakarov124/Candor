@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Candor.UseCases.Blog.CreatePost;
-using Candor.UseCases.Blog.FindUserById;
 using Candor.UseCases.Blog.GetCurrentUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,19 +24,19 @@ public class BlogController : Controller
     }
 
     /// <summary>
-    /// User's blog page.
+    /// GET: User's blog page.
     /// </summary>
     /// <returns>View.</returns>
     [HttpGet("/Blog")]
-    public IActionResult UserBlog()
+    public async Task<IActionResult> UserBlogAsync(CancellationToken cancellationToken)
     {
-        var user = mediator.Send(new GetCurrentUserQuery(), CancellationToken.None);
+        var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
-        return View();
+        return View(user.Posts);
     }
 
     /// <summary>
-    /// Create post page.
+    /// GET: Create post page.
     /// </summary>
     /// <returns>View.</returns>
     [HttpGet("/CreatePost")]
@@ -47,7 +46,7 @@ public class BlogController : Controller
     }
 
     /// <summary>
-    /// Creates post.
+    /// POST: Creates post.
     /// </summary>
     /// <param name="command">Create post command.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
@@ -55,6 +54,13 @@ public class BlogController : Controller
     [HttpPost("/CreatePost")]
     public async Task<IActionResult> CreatePostAsync(CreatePostCommand command, CancellationToken cancellationToken)
     {
+        var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
+
+        command = command with
+        {
+            UserId = user.Id
+        };
+
         await mediator.Send(command, cancellationToken);
 
         return RedirectToAction("UserBlog");

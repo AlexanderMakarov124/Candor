@@ -12,7 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connection));
+builder.Services.AddDbContext<ApplicationContext>(options => options
+    .UseLazyLoadingProxies()
+    .UseSqlServer(connection));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
     {

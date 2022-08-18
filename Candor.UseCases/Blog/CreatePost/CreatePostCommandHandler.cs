@@ -27,7 +27,7 @@ internal class CreatePostCommandHandler : AsyncRequestHandler<CreatePostCommand>
     /// <inheritdoc />
     protected override async Task Handle(CreatePostCommand request, CancellationToken cancellationToken)
     {
-        var post = new Post { Title = request.Title, Content = request.Content, CreatedAt = DateTime.UtcNow };
+        var post = new Post { Title = request.Title, Content = request.Content, CreatedAt = DateTime.UtcNow, UserId = request.UserId};
 
         await db.Posts.AddAsync(post, cancellationToken);
         await db.SaveChangesAsync(cancellationToken);

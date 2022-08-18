@@ -1,4 +1,4 @@
-﻿namespace Candor.Infrastructure.Common;
+﻿namespace Candor.Infrastructure.Common.Exceptions;
 
 /// <summary>
 /// Not found exception.

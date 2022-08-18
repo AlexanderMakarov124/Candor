@@ -13,4 +13,7 @@ public record CreatePostCommand : IRequest
 
     /// <inheritdoc cref="Post.Content"/>
     public string? Content { get; init; }
+
+    /// <inheritdoc cref="Post.UserId"/>
+    public string UserId { get; init; }
 }

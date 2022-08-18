@@ -21,7 +21,12 @@ public class Post
     public string? Content { get; init; }
 
     /// <summary>
-    /// The date when a blog was created.
+    /// The date when a post was created.
     /// </summary>
     public DateTime CreatedAt { get; init; }
+
+    /// <summary>
+    /// Id of user who owns the blog post.
+    /// </summary>
+    public string UserId { get; init; }
 }
