@@ -52,7 +52,7 @@ public class AuthorizationController : Controller
             try
             {
                 await mediator.Send(new RegisterCommand(user, viewModel.Password), cancellationToken);
-                return RedirectToAction("Index", "Home"); ;
+                return RedirectToAction("Index", "Blog"); ;
             }
             catch (AuthenticationException ex)
             {
@@ -89,7 +89,7 @@ public class AuthorizationController : Controller
             {
                 var command = new LoginCommand(viewModel.UserName, viewModel.Password);
                 await mediator.Send(command, cancellationToken);
-                return RedirectToAction("Index", "Home"); ;
+                return RedirectToAction("Index", "Blog"); ;
             }
             catch (AuthenticationException ex)
             {
@@ -111,6 +111,6 @@ public class AuthorizationController : Controller
     public async Task<IActionResult> LogoutAsync(CancellationToken cancellationToken)
     {
         await mediator.Send(new LogoutCommand(), cancellationToken);
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Blog");
     }
 }
