@@ -27,6 +27,6 @@ internal class LogoutCommandHandler : AsyncRequestHandler<LogoutCommand>
     {
         await signInManager.SignOutAsync();
 
-        logger.LogInformation("Signed out: {UserName}", signInManager.Context.User.Identity?.Name);
+        logger.LogDebug("Signed out: {UserName}", signInManager.Context.User.Identity?.Name);
     }
 }

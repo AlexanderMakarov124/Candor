@@ -43,8 +43,7 @@ internal class RegisterCommandHandler : AsyncRequestHandler<RegisterCommand>
         else
         {
             var errors = string.Join(", ", createResult.Errors.Select(error => error.Description));
-
-            logger.LogError("Sign up error: {Errors}", errors);
+            logger.LogError(errors);
 
             throw new AuthenticationException(errors);
         }

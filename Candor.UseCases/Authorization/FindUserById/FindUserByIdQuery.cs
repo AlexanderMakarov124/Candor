@@ -1,7 +1,7 @@
 ﻿using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.FindUserById;
+namespace Candor.UseCases.Authorization.FindUserById;
 
 /// <summary>
 /// Find user by id query.

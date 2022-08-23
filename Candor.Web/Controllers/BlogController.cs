@@ -1,12 +1,16 @@
 ﻿using System.Diagnostics;
 using AutoMapper;
+using Candor.Domain.Models;
+using Candor.Infrastructure.Common.Exceptions;
+using Candor.UseCases.Authorization.GetCurrentUser;
 using Candor.UseCases.Blog.CreatePost;
+using Candor.UseCases.Blog.FindPostById;
 using Candor.UseCases.Blog.GetAllPosts;
-using Candor.UseCases.Blog.GetCurrentUser;
 using Candor.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Candor.Web.Controllers;
 
@@ -82,5 +86,20 @@ public class BlogController : Controller
         await mediator.Send(command, cancellationToken);
 
         return RedirectToAction("UserBlog");
+    }
+
+    [HttpGet("/Post/{id:int}")]
+    public async Task<IActionResult> PostAsync(int id, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var post = await mediator.Send(new FindPostByIdQuery(id), cancellationToken);
+
+             return View(post);
+        }
+        catch (NotFoundException)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

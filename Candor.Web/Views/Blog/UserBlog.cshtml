@@ -3,7 +3,8 @@
 
 @model IEnumerable<Post>
 
-
-@await Component.InvokeAsync("Blog", new { posts = Model })
+<h3>Posts</h3>
 
 <a asp-action="CreatePost">Create post</a>
+
+@await Component.InvokeAsync("Blog", new { posts = Model })

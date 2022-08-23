@@ -10,7 +10,7 @@ namespace Candor.UseCases.Blog.CreatePost;
 public record CreatePostCommand : IRequest
 {
     /// <inheritdoc cref="Post.Title"/>
-    [MaxLength(50)]
+    [MaxLength(200)]
     public string? Title { get; init; }
 
     /// <inheritdoc cref="Post.Content"/>

@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Candor.UseCases.Blog.FindUserById;
+namespace Candor.UseCases.Authorization.FindUserById;
 
 /// <summary>
 /// Find user by id query handler.
@@ -36,7 +36,7 @@ internal class FindUserByIdQueryHandler : IRequestHandler<FindUserByIdQuery, Use
             throw new NotFoundException(errorMessage);
         }
 
-        logger.LogInformation("User with id {Id} was found successfully", request.Id);
+        logger.LogDebug("User with id {Id} was found successfully", request.Id);
 
         return user;
     }

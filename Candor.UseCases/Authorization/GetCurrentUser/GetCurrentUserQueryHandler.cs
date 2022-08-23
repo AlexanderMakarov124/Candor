@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 
-namespace Candor.UseCases.Blog.GetCurrentUser;
+namespace Candor.UseCases.Authorization.GetCurrentUser;
 internal class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, User>
 {
     private readonly UserManager<User> userManager;
@@ -28,13 +28,13 @@ internal class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery,
 
         if (user == null)
         {
-            const string errorMessage = "Error: current user does not exist.";
+            const string errorMessage = "Current user does not exist.";
             logger.LogError(errorMessage);
 
             throw new NotFoundException(errorMessage);
         }
 
-        logger.LogInformation("Current user was retrieved");
+        logger.LogDebug("Current user was retrieved");
 
         return user;
     }

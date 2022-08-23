@@ -1,0 +1,8 @@
+﻿@model Candor.Domain.Models.Post
+
+<div class="post">
+    <label>@Model.User.UserName</label>
+    <label>@Model.CreatedAt.ToShortDateString()</label>
+    <h3>@Model.Title</h3>
+    <p class="postContent">@Model.Content</p>
+</div>

@@ -1,6 +1,6 @@
 ﻿using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.GetCurrentUser;
+namespace Candor.UseCases.Authorization.GetCurrentUser;
 
 public record GetCurrentUserQuery : IRequest<User>;
