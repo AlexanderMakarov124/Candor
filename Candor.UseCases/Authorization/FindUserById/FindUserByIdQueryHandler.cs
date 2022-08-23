@@ -30,10 +30,9 @@ internal class FindUserByIdQueryHandler : IRequestHandler<FindUserByIdQuery, Use
 
         if (user == null)
         {
-            var errorMessage = $"User with id {request.Id} was not found.";
-            logger.LogError(errorMessage);
+            logger.LogError("User with id {Id} was not found.", request.Id);
 
-            throw new NotFoundException(errorMessage);
+            throw new NotFoundException("User was not found");
         }
 
         logger.LogDebug("User with id {Id} was found successfully", request.Id);

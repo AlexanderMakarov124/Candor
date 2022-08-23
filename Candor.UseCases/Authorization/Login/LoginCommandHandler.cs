@@ -30,7 +30,7 @@ internal class LoginCommandHandler : AsyncRequestHandler<LoginCommand>
 
         if (!loginResult.Succeeded)
         {
-            const string errorMessage = "Incorrect username or password";
+            const string errorMessage = "Sign in failed: Incorrect username or password";
             logger.LogError(errorMessage);
 
             throw new AuthenticationException(errorMessage);

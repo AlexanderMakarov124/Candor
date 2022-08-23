@@ -38,12 +38,12 @@ internal class RegisterCommandHandler : AsyncRequestHandler<RegisterCommand>
         {
             await signInManager.SignInAsync(request.User, false);
 
-            logger.LogInformation("Signed up: {UserName}", request.User.UserName);
+            logger.LogDebug("Signed up: {UserName}", request.User.UserName);
         }
         else
         {
             var errors = string.Join(", ", createResult.Errors.Select(error => error.Description));
-            logger.LogError(errors);
+            logger.LogError("Register failed: {Errors}", errors);
 
             throw new AuthenticationException(errors);
         }

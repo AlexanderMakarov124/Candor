@@ -32,6 +32,6 @@ internal class CreatePostCommandHandler : AsyncRequestHandler<CreatePostCommand>
         await db.Posts.AddAsync(post, cancellationToken);
         await db.SaveChangesAsync(cancellationToken);
 
-        logger.LogInformation("Post was created");
+        logger.LogDebug("Post was created");
     }
 }

@@ -6,7 +6,7 @@
     {
         foreach (var post in Model)
         {
-            <label>@post.CreatedAt @post.User.UserName</label>
+            <label>@post.CreatedAt @post.User!.UserName</label>
             <h4><a asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
             <p class="postContent">@post.Content</p>
         }

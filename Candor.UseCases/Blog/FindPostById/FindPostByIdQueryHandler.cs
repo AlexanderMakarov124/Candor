@@ -29,10 +29,9 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
 
         if (post == null)
         {
-            var errorMessage = $"Post with id {request.Id} does not exist.";
-            logger.LogError(errorMessage);
+            logger.LogError("Post with id {Id} does not exist.", request.Id);
 
-            throw new NotFoundException(errorMessage);
+            throw new NotFoundException("Post was not found");
         }
 
         logger.LogDebug("Post with id {Id} was retrieved.", request.Id);

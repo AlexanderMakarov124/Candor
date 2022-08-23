@@ -18,5 +18,5 @@ public record CreatePostCommand : IRequest
     public string? Content { get; init; }
 
     /// <inheritdoc cref="Post.UserId"/>
-    public string UserId { get; init; }
+    public string? UserId { get; init; }
 }
