@@ -1,16 +1,12 @@
-﻿using System.Diagnostics;
-using AutoMapper;
-using Candor.Domain.Models;
+﻿using AutoMapper;
 using Candor.Infrastructure.Common.Exceptions;
 using Candor.UseCases.Authorization.GetCurrentUser;
 using Candor.UseCases.Blog.CreatePost;
 using Candor.UseCases.Blog.FindPostById;
 using Candor.UseCases.Blog.GetAllPosts;
-using Candor.Web.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Candor.Web.Controllers;
 
@@ -88,6 +84,12 @@ public class BlogController : Controller
         return RedirectToAction("UserBlog");
     }
 
+    /// <summary>
+    /// GET: Post page.
+    /// </summary>
+    /// <param name="id">Post id.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>View.</returns>
     [HttpGet("/Post/{id:int}")]
     public async Task<IActionResult> PostAsync(int id, CancellationToken cancellationToken)
     {
@@ -99,7 +101,7 @@ public class BlogController : Controller
         }
         catch (NotFoundException)
         {
-            return RedirectToAction("Index");
+            return NotFound();
         }
     }
 }

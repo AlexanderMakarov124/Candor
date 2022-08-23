@@ -3,7 +3,6 @@ using Candor.Domain.Models;
 using Candor.UseCases.Authorization.Register;
 using Candor.Web.MappingProfiles;
 using MediatR;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
@@ -54,10 +53,8 @@ builder.Host.UseNLog();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
