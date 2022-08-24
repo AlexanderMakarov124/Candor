@@ -25,7 +25,9 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
     /// <inheritdoc />
     public async Task<Post> Handle(FindPostByIdQuery request, CancellationToken cancellationToken)
     {
+#pragma warning disable CA2016 // Forward the 'CancellationToken' parameter to methods
         var post = await db.Posts.FindAsync(request.Id);
+#pragma warning restore CA2016 // Forward the 'CancellationToken' parameter to methods
 
         if (post == null)
         {

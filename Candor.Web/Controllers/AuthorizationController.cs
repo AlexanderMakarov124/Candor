@@ -51,7 +51,7 @@ public class AuthorizationController : Controller
             var user = mapper.Map<User>(viewModel);
             try
             {
-                await mediator.Send(new RegisterCommand(user, viewModel.Password), cancellationToken);
+                await mediator.Send(new RegisterCommand(user, viewModel.Password!), cancellationToken);
                 return RedirectToAction("Index", "Blog"); ;
             }
             catch (AuthenticationException ex)
@@ -87,7 +87,7 @@ public class AuthorizationController : Controller
         {
             try
             {
-                var command = new LoginCommand(viewModel.UserName, viewModel.Password);
+                var command = new LoginCommand(viewModel.UserName!, viewModel.Password!);
                 await mediator.Send(command, cancellationToken);
                 return RedirectToAction("Index", "Blog"); ;
             }

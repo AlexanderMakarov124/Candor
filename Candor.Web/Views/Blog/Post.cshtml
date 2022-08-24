@@ -1,5 +1,9 @@
 ﻿@model Candor.Domain.Models.Post
 
+<a asp-action="EditPost" asp-route-id="@Model.Id">Edit</a>
+
+<a>Delete</a>
+
 <div class="post">
     <label>@Model.User!.UserName</label>
     <label>@Model.CreatedAt.ToShortDateString()</label>

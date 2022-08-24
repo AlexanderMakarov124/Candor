@@ -1,9 +1,6 @@
-namespace Candor.Web.ViewModels;
+﻿namespace Candor.Web.ViewModels;
 
-/// <summary>
-/// Error view model.
-/// </summary>
-public class ErrorViewModel
+internal class ErrorViewModel
 {
     /// <summary>
     /// Request id.

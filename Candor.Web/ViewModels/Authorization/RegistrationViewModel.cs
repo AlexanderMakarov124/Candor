@@ -14,21 +14,21 @@ public class RegistrationViewModel
     [Display(Name = "Username")]
     [MaxLength(30)]
     [MinLength(3, ErrorMessage = "Username must contain at least 3 characters.")]
-    public string UserName { get; set; }
+    public string? UserName { get; set; }
 
     /// <summary>
     /// Name.
     /// </summary>
     [Required]
     [Display(Name = "Name")]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     /// <summary>
     /// Email.
     /// </summary>
     [Required]
     [Display(Name = "Email")]
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
     /// Password.
@@ -36,5 +36,5 @@ public class RegistrationViewModel
     [Required]
     [DataType(DataType.Password)]
     [Display(Name = "Password")]
-    public string Password { get; set; }
+    public string? Password { get; set; }
 }

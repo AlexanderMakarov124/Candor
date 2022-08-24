@@ -1,0 +1,17 @@
+﻿@model Candor.Domain.Models.Post
+
+<div class="d-flex align-items-center justify-content-center">
+    <form method="post" asp-action="EditPost">
+        <div class="form-group">
+            <label asp-for="Title"></label>
+            <input class="form-control" type="text" asp-for="@Model.Title" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Content"></label>
+            <textarea class="form-control" asp-for="@Model.Content"></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Edit</button>
+    </form>
+</div>

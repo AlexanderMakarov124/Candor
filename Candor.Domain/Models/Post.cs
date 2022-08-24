@@ -13,12 +13,12 @@ public class Post
     /// <summary>
     /// Title.
     /// </summary>
-    public string? Title { get; init; }
+    public string? Title { get; set; }
 
     /// <summary>
     /// Content.
     /// </summary>
-    public string? Content { get; init; }
+    public string? Content { get; set; }
 
     /// <summary>
     /// The date when a post was created.

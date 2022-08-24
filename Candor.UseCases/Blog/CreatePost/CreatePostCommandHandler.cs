@@ -16,8 +16,6 @@ internal class CreatePostCommandHandler : AsyncRequestHandler<CreatePostCommand>
     /// <summary>
     /// Constructor.
     /// </summary>
-    /// <param name="db"></param>
-    /// <param name="logger"></param>
     public CreatePostCommandHandler(ApplicationContext db, ILogger<CreatePostCommandHandler> logger)
     {
         this.db = db;
