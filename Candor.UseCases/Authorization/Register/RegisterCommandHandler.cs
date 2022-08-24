@@ -21,8 +21,7 @@ internal class RegisterCommandHandler : AsyncRequestHandler<RegisterCommand>
     public RegisterCommandHandler(
         UserManager<User> userManager,
         SignInManager<User> signInManager,
-        ILogger<RegisterCommandHandler> logger
-        )
+        ILogger<RegisterCommandHandler> logger)
     {
         this.userManager = userManager;
         this.signInManager = signInManager;

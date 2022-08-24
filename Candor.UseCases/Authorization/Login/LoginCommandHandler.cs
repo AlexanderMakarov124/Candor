@@ -22,7 +22,7 @@ internal class LoginCommandHandler : AsyncRequestHandler<LoginCommand>
         this.signInManager = signInManager;
         this.logger = logger;
     }
-    
+
     /// <inheritdoc />
     protected override async Task Handle(LoginCommand request, CancellationToken cancellationToken)
     {

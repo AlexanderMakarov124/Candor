@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candor.Domain", "Candor.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candor.UseCases", "Candor.UseCases\Candor.UseCases.csproj", "{E3CB4427-3FB3-44A2-936F-EF02AADDBF9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Candor.Infrastructure.Common", "Candor.Infrastructure.Common\Candor.Infrastructure.Common.csproj", "{A9D5DD07-A6F1-4F73-8BAE-495AC7CB1E5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Candor.Infrastructure.Common", "Candor.Infrastructure.Common\Candor.Infrastructure.Common.csproj", "{A9D5DD07-A6F1-4F73-8BAE-495AC7CB1E5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{CF6D7DE0-DA7B-4505-AE75-2F2C0B145005}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

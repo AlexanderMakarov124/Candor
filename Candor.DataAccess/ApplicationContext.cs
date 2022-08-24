@@ -14,7 +14,6 @@ public class ApplicationContext : IdentityDbContext<User>
     /// </summary>
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-
     }
 
     /// <summary>

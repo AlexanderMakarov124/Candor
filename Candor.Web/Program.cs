@@ -1,4 +1,4 @@
-using Candor.DataAccess;
+﻿using Candor.DataAccess;
 using Candor.Domain.Models;
 using Candor.UseCases.Authorization.Register;
 using Candor.Web.MappingProfiles;
@@ -19,9 +19,9 @@ builder.Services.AddDbContext<ApplicationContext>(options => options
 builder.Services.AddIdentity<User, IdentityRole>(options =>
     {
         options.Password.RequiredLength = 4;
-        options.Password.RequireNonAlphanumeric = false;   
-        options.Password.RequireLowercase = false; 
-        options.Password.RequireUppercase = false; 
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireUppercase = false;
         options.Password.RequireDigit = false;
 
         options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -35,13 +35,14 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-    //options.Cookie.Name = "YourAppCookieName";
-    //options.Cookie.HttpOnly = true;
-    //options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    // options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    // options.Cookie.Name = "YourAppCookieName";
+    // options.Cookie.HttpOnly = true;
+    // options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     options.LoginPath = "/Login";
-    //options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-    //options.SlidingExpiration = true;
+
+    // options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+    // options.SlidingExpiration = true;
 });
 
 builder.Services.AddMediatR(typeof(RegisterCommand).Assembly);

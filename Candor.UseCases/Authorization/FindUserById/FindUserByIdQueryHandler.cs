@@ -13,7 +13,7 @@ internal class FindUserByIdQueryHandler : IRequestHandler<FindUserByIdQuery, Use
 {
     private readonly UserManager<User> userManager;
     private readonly ILogger<FindUserByIdQueryHandler> logger;
-        
+
     /// <summary>
     /// Constructor.
     /// </summary>

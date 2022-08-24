@@ -14,13 +14,14 @@ internal class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, IEnum
     private readonly ILogger<GetAllPostsQueryHandler> logger;
     private readonly ApplicationContext db;
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
     public GetAllPostsQueryHandler(ILogger<GetAllPostsQueryHandler> logger, ApplicationContext db)
     {
         this.logger = logger;
         this.db = db;
     }
-
-
 
     /// <inheritdoc />
     public async Task<IEnumerable<Post>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)

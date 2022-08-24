@@ -52,7 +52,7 @@ public class AuthorizationController : Controller
             try
             {
                 await mediator.Send(new RegisterCommand(user, viewModel.Password!), cancellationToken);
-                return RedirectToAction("Index", "Blog"); ;
+                return RedirectToAction("Index", "Blog");
             }
             catch (AuthenticationException ex)
             {
@@ -61,7 +61,6 @@ public class AuthorizationController : Controller
         }
 
         return View("Registration");
-
     }
 
     /// <summary>
@@ -89,17 +88,15 @@ public class AuthorizationController : Controller
             {
                 var command = new LoginCommand(viewModel.UserName!, viewModel.Password!);
                 await mediator.Send(command, cancellationToken);
-                return RedirectToAction("Index", "Blog"); ;
+                return RedirectToAction("Index", "Blog");
             }
             catch (AuthenticationException ex)
             {
                 ViewData["Error"] = ex.Message;
-                
             }
         }
 
         return View("Login");
-
     }
 
     /// <summary>

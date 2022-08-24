@@ -14,13 +14,14 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
     private readonly ILogger<FindPostByIdQueryHandler> logger;
     private readonly ApplicationContext db;
 
+    /// <summary>
+    /// Constructor.
+    /// </summary>
     public FindPostByIdQueryHandler(ILogger<FindPostByIdQueryHandler> logger, ApplicationContext db)
     {
         this.logger = logger;
         this.db = db;
     }
-
-
 
     /// <inheritdoc />
     public async Task<Post> Handle(FindPostByIdQuery request, CancellationToken cancellationToken)

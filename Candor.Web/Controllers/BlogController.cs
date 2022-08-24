@@ -100,7 +100,7 @@ public class BlogController : Controller
         {
             var post = await mediator.Send(new FindPostByIdQuery(id), cancellationToken);
 
-             return View(post);
+            return View(post);
         }
         catch (NotFoundException)
         {
