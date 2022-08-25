@@ -46,8 +46,4 @@
     <EditorConfigFiles Remove="C:\Projects\.NET\Candor\Candor.Web\.editorconfig" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="C:\Projects\.NET\Candor\Candor.Web\.editorconfig" />
-  </ItemGroup>
-
 </Project>

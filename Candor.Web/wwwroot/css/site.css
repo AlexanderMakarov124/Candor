@@ -39,3 +39,8 @@ body {
 .postContent {
     white-space: pre-wrap;
 }
+
+.loginPartial {
+    padding-right: 100px;
+}
+
