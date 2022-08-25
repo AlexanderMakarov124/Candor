@@ -155,7 +155,7 @@ public class BlogController : Controller
     /// <param name="id">Post id.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Redirect to user's blog.</returns>
-    [HttpDelete("/Post/{id:int}")]
+    [HttpPost("/Post/{id:int}")]
     public async Task<IActionResult> DeletePostAsync(int id, CancellationToken cancellationToken)
     {
         var post = await mediator.Send(new FindPostByIdQuery(id), cancellationToken);

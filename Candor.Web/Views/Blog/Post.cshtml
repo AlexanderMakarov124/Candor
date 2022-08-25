@@ -1,8 +1,9 @@
 ﻿@model Candor.Domain.Models.Post
 
 <a asp-action="EditPost" asp-route-id="@Model.Id">Edit</a>
-
-<a>Delete</a>
+<form method="post" asp-action="DeletePost" asp-route-id="@Model.Id">
+    <button type="submit">Delete</button>
+</form>
 
 <div class="post">
     <label>@Model.User!.UserName</label>
