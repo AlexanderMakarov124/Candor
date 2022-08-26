@@ -52,6 +52,11 @@ builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
 builder.Logging.ClearProviders();
 builder.Host.UseNLog();
 
+builder.Services.AddWebOptimizer(pipeline =>
+{
+    pipeline.CompileScssFiles();
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -61,6 +66,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseWebOptimizer();
+
 app.UseStaticFiles();
 
 app.UseRouting();

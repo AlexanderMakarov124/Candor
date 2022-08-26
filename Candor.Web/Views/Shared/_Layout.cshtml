@@ -3,18 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Candor.Web</title>
+    <title>@ViewData["Title"] - Candor</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/scss/styles.scss" asp-append-version="true" />
     <link rel="stylesheet" href="~/Candor.Web.styles.css" asp-append-version="true" />
     @await Html.PartialAsync("_Favicons")
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow px-5">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 px-6">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Blog" asp-action="Index">
-                    <img src="img/letter-c-icon-22.jpg" alt="Candor" width="30" height="30" class="d-inline-block align-text-top"/>
+                    <img src="/img/letter-c-icon-22.jpg" alt="Candor" width="30" height="30" class="d-inline-block align-text-top"/>
                     Candor
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -33,7 +34,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-5">
             @RenderBody()
         </main>
     </div>

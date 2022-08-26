@@ -1,0 +1,14 @@
+@import 'bootstrap_override';
+@import "../lib/bootstrap/dist/scss/bootstrap";
+
+$navFontSize: 20px;
+
+nav {
+    font-size: $navFontSize;
+}
+
+.post-link {
+    color: $body-color;
+    text-decoration: none;
+    font-weight: 600;
+}

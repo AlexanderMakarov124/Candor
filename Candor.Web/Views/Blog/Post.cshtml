@@ -4,10 +4,14 @@
 
 @inject UserManager<User> UserManager
 
+@{
+    ViewData["Title"] = "Post";
+}
+
 @if (await UserManager.GetUserAsync(User) == Model.User)
 {
-    <a asp-action="EditPost" asp-route-id="@Model.Id">Edit</a>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+    <a class="btn btn-primary" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a>
+    <button class="btn btn-danger" type="button"  data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
 
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">

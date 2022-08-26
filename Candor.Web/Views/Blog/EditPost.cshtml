@@ -1,5 +1,9 @@
 ﻿@model Candor.Domain.Models.Post
 
+@{
+    ViewData["Title"] = "Editing post";
+}
+
 <div class="d-flex align-items-center justify-content-center">
     <form method="post" asp-action="EditPost">
         <div class="form-group">
@@ -12,6 +16,6 @@
             <textarea class="form-control" asp-for="@Model.Content"></textarea>
         </div>
 
-        <button class="btn btn-primary" type="submit">Edit</button>
+        <button class="btn btn-success" type="submit">Save changes</button>
     </form>
 </div>
