@@ -7,7 +7,7 @@
         foreach (var post in Model)
         {
             <label> @post.User!.UserName @post.CreatedAt.ToShortDateString()</label>
-            <h4><a class="post-link" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
+            <h4><a class="post-name" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
             <p class="postContent">@post.Content</p>
         }
     }

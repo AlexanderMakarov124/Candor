@@ -6,13 +6,12 @@
     <title>@ViewData["Title"] - Candor</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/scss/styles.scss" asp-append-version="true" />
     <link rel="stylesheet" href="~/Candor.Web.styles.css" asp-append-version="true" />
     @await Html.PartialAsync("_Favicons")
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 px-6">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Blog" asp-action="Index">
                     <img src="/img/letter-c-icon-22.jpg" alt="Candor" width="30" height="30" class="d-inline-block align-text-top"/>
