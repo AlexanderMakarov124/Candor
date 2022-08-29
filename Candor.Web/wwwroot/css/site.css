@@ -1,6 +1,7 @@
 :root {
     --dark-grey: #212529;
     --light-bold: 600;
+    --common-font-size: 20px;
 }
 
 nav {
@@ -10,7 +11,8 @@ nav {
 }
 
 body {
-    font-size: 16px;
+    font-size: var(--common-font-size);
+    font-family: Georgia, serif;
 }
 
 @media (min-width: 768px) {
