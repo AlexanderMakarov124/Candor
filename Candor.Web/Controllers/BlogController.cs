@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Candor.Infrastructure.Common.Exceptions;
+﻿using Candor.Infrastructure.Common.Exceptions;
 using Candor.UseCases.Authorization.GetCurrentUser;
 using Candor.UseCases.Blog.CreatePost;
 using Candor.UseCases.Blog.DeletePost;
@@ -19,15 +18,13 @@ namespace Candor.Web.Controllers;
 public class BlogController : Controller
 {
     private readonly IMediator mediator;
-    private readonly IMapper mapper;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public BlogController(IMediator mediator, IMapper mapper)
+    public BlogController(IMediator mediator)
     {
         this.mediator = mediator;
-        this.mapper = mapper;
     }
 
     /// <summary>

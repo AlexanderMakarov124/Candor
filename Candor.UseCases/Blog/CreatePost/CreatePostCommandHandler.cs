@@ -10,16 +10,16 @@ namespace Candor.UseCases.Blog.CreatePost;
 /// </summary>
 internal class CreatePostCommandHandler : AsyncRequestHandler<CreatePostCommand>
 {
-    private readonly ApplicationContext db;
     private readonly ILogger<CreatePostCommandHandler> logger;
+    private readonly ApplicationContext db;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public CreatePostCommandHandler(ApplicationContext db, ILogger<CreatePostCommandHandler> logger)
+    public CreatePostCommandHandler(ILogger<CreatePostCommandHandler> logger, ApplicationContext db)
     {
-        this.db = db;
         this.logger = logger;
+        this.db = db;
     }
 
     /// <inheritdoc />

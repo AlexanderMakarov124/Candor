@@ -74,3 +74,8 @@ app.MapControllerRoute(
     pattern: "{controller=Blog}/{action=Index}/{id?}");
 
 app.Run();
+
+namespace Candor.Web
+{
+    public partial class Program { }
+}

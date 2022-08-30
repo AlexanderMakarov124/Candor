@@ -11,21 +11,22 @@ namespace Candor.UseCases.Authorization.GetCurrentUser;
 /// </summary>
 internal class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery, User>
 {
+    private readonly ILogger<GetCurrentUserQueryHandler> logger;
     private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
-    private readonly ILogger<GetCurrentUserQueryHandler> logger;
 
     /// <summary>
     /// Constructor.
     /// </summary>
     public GetCurrentUserQueryHandler(
+        ILogger<GetCurrentUserQueryHandler> logger,
         UserManager<User> userManager,
-        SignInManager<User> signInManager,
-        ILogger<GetCurrentUserQueryHandler> logger)
+        SignInManager<User> signInManager
+        )
     {
+        this.logger = logger;
         this.userManager = userManager;
         this.signInManager = signInManager;
-        this.logger = logger;
     }
 
     /// <inheritdoc />

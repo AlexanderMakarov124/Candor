@@ -11,16 +11,16 @@ namespace Candor.UseCases.Authorization.FindUserById;
 /// </summary>
 internal class FindUserByIdQueryHandler : IRequestHandler<FindUserByIdQuery, User>
 {
-    private readonly UserManager<User> userManager;
     private readonly ILogger<FindUserByIdQueryHandler> logger;
+    private readonly UserManager<User> userManager;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public FindUserByIdQueryHandler(UserManager<User> userManager, ILogger<FindUserByIdQueryHandler> logger)
+    public FindUserByIdQueryHandler( ILogger<FindUserByIdQueryHandler> logger, UserManager<User> userManager)
     {
-        this.userManager = userManager;
         this.logger = logger;
+        this.userManager = userManager;
     }
 
     /// <inheritdoc />

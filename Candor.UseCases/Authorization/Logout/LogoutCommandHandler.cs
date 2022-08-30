@@ -10,16 +10,16 @@ namespace Candor.UseCases.Authorization.Logout;
 /// </summary>
 internal class LogoutCommandHandler : AsyncRequestHandler<LogoutCommand>
 {
-    private readonly SignInManager<User> signInManager;
     private readonly ILogger<LogoutCommandHandler> logger;
+    private readonly SignInManager<User> signInManager;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public LogoutCommandHandler(SignInManager<User> signInManager, ILogger<LogoutCommandHandler> logger)
+    public LogoutCommandHandler(ILogger<LogoutCommandHandler> logger, SignInManager<User> signInManager)
     {
-        this.signInManager = signInManager;
         this.logger = logger;
+        this.signInManager = signInManager;
     }
 
     /// <inheritdoc />

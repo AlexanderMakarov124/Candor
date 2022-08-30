@@ -11,16 +11,16 @@ namespace Candor.UseCases.Authorization.Login;
 /// </summary>
 internal class LoginCommandHandler : AsyncRequestHandler<LoginCommand>
 {
-    private readonly SignInManager<User> signInManager;
     private readonly ILogger<LoginCommandHandler> logger;
+    private readonly SignInManager<User> signInManager;
 
     /// <summary>
     /// Constructor.
     /// </summary>
-    public LoginCommandHandler(SignInManager<User> signInManager, ILogger<LoginCommandHandler> logger)
+    public LoginCommandHandler(ILogger<LoginCommandHandler> logger, SignInManager<User> signInManager)
     {
-        this.signInManager = signInManager;
         this.logger = logger;
+        this.signInManager = signInManager;
     }
 
     /// <inheritdoc />

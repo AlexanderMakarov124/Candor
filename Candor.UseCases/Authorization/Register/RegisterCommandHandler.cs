@@ -11,21 +11,22 @@ namespace Candor.UseCases.Authorization.Register;
 /// </summary>
 internal class RegisterCommandHandler : AsyncRequestHandler<RegisterCommand>
 {
+    private readonly ILogger<RegisterCommandHandler> logger;
     private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
-    private readonly ILogger<RegisterCommandHandler> logger;
 
     /// <summary>
     /// Constructor.
     /// </summary>
     public RegisterCommandHandler(
+        ILogger<RegisterCommandHandler> logger,
         UserManager<User> userManager,
-        SignInManager<User> signInManager,
-        ILogger<RegisterCommandHandler> logger)
+        SignInManager<User> signInManager
+        )
     {
+        this.logger = logger;
         this.userManager = userManager;
         this.signInManager = signInManager;
-        this.logger = logger;
     }
 
     /// <inheritdoc />
