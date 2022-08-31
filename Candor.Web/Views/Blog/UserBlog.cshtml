@@ -7,8 +7,13 @@
     ViewData["Title"] = "My blog";
 }
 
-<h3>Posts</h3>
-
-<a class="btn btn-primary" asp-action="CreatePost">Create post</a>
+<div class="row">
+    <div class="col-md-auto">
+        <h3>Posts</h3>
+    </div>
+    <div class="col-md-auto">
+        <a class="btn btn-primary" asp-action="CreatePost">Create post</a>
+    </div>
+</div>
 
 @await Component.InvokeAsync("Blog", new { posts = Model })

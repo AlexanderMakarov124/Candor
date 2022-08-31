@@ -10,9 +10,6 @@
 
 @if (await UserManager.GetUserAsync(User) == Model.User)
 {
-    <a class="btn btn-primary" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a>
-    <button class="btn btn-danger" type="button"  data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
-
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -41,6 +38,32 @@
 <div class="post">
     <label>@Model.User!.UserName</label>
     <label>@Model.CreatedAt.ToShortDateString()</label>
-    <h4 class="post-name">@Model.Title</h4>
+    <div class="row">
+        <div class="col-md-auto">
+            <h4 class="post-name">@Model.Title</h4>
+        </div>
+
+        <div class="dropdown col-md-auto">
+            <div class="dropdown-points" data-bs-toggle="dropdown" id="postActions" aria-expanded="false">
+                <svg class="dropdown-points dropdown-toggle" width="30" height="20"
+                     data-bs-container="body"
+                     data-bs-toggle="popover"
+                     data-bs-trigger="hover focus"
+                     data-bs-placement="top"
+                     data-bs-content="Actions">
+
+                    <circle cx="10" cy="10" r="2"/>
+                    <circle cx="16" cy="10" r="2"/>
+                    <circle cx="22" cy="10" r="2"/>
+                </svg>
+            </div>
+
+            <ul class="dropdown-menu" aria-labelledby="postActions">
+                <li><a class="dropdown-item" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
+            </ul>
+        </div>
+    </div>
+
     <p class="postContent">@Model.Content</p>
 </div>

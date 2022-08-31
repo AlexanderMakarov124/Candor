@@ -17,13 +17,6 @@ public class RegistrationViewModel
     public string? UserName { get; set; }
 
     /// <summary>
-    /// Name.
-    /// </summary>
-    [Required]
-    [Display(Name = "Name")]
-    public string? Name { get; set; }
-
-    /// <summary>
     /// Email.
     /// </summary>
     [Required]

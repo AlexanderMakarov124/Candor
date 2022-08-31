@@ -48,10 +48,6 @@ body {
     white-space: pre-wrap;
 }
 
-.footer {
-    line-height: 45px !important;
-}
-
 .post-name {
     color: var(--dark-grey);
     font-weight: var(--light-bold);
@@ -59,4 +55,30 @@ body {
 
 a.post-name {
     text-decoration: none;
+}
+
+.dropdown-item:hover {
+    cursor: pointer;
+}
+
+svg.dropdown-points {
+    fill: grey;
+}
+
+svg.dropdown-points:hover {
+    fill: black;
+    cursor: pointer;
+}
+
+div.dropdown-points {
+    width: 30px;
+    height: 30px;
+}
+
+.dropdown {
+    padding-left: 0;
+}
+
+.dropdown-menu {
+    min-width: 5rem;
 }
