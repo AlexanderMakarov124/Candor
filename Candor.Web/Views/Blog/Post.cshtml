@@ -8,62 +8,70 @@
     ViewData["Title"] = "Post";
 }
 
-@if (await UserManager.GetUserAsync(User) == Model.User)
-{
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
 
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    Do you really want to delete this post?
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form method="post" asp-action="DeletePost" asp-route-id="@Model.Id">
-                        <button type="submit" class="btn btn-primary">Delete</button>
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-}
 
 <div class="post">
     <label>@Model.User!.UserName</label>
     <label>@Model.CreatedAt.ToShortDateString()</label>
-    <div class="row">
-        <div class="col-md-auto">
-            <h4 class="post-name">@Model.Title</h4>
-        </div>
 
-        <div class="dropdown col-md-auto">
-            <div class="dropdown-points" data-bs-toggle="dropdown" id="postActions" aria-expanded="false">
-                <svg class="dropdown-points dropdown-toggle" width="30" height="20"
-                     data-bs-container="body"
-                     data-bs-toggle="popover"
-                     data-bs-trigger="hover focus"
-                     data-bs-placement="top"
-                     data-bs-content="Actions">
-
-                    <circle cx="10" cy="10" r="2"/>
-                    <circle cx="16" cy="10" r="2"/>
-                    <circle cx="22" cy="10" r="2"/>
-                </svg>
+    @if (await UserManager.GetUserAsync(User) == Model.User)
+    {
+        <div class="row">
+            <div class="col-md-auto">
+                <h4 class="post-name">@Model.Title</h4>
             </div>
 
-            <ul class="dropdown-menu" aria-labelledby="postActions">
-                <li><a class="dropdown-item" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
-            </ul>
+            <div class="dropdown col-md-auto">
+                <div class="dropdown-points" data-bs-toggle="dropdown" id="postActions" aria-expanded="false">
+                    <svg class="dropdown-points dropdown-toggle"
+                         data-bs-container="body"
+                         data-bs-toggle="popover"
+                         data-bs-trigger="hover focus"
+                         data-bs-placement="top"
+                         data-bs-content="Actions"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <circle cx="10" cy="10" r="2" />
+                        <circle cx="16" cy="10" r="2" />
+                        <circle cx="22" cy="10" r="2" />
+                    </svg>
+                </div>
+
+                <ul class="dropdown-menu" aria-labelledby="postActions">
+                    <li><a class="dropdown-item" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
+
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Delete post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        Do you really want to delete this post?
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form method="post" asp-action="DeletePost" asp-route-id="@Model.Id">
+                            <button type="submit" class="btn btn-primary">Delete</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h4 class="post-name">@Model.Title</h4>
+    }
 
     <p class="postContent">@Model.Content</p>
 </div>
