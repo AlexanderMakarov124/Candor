@@ -6,10 +6,27 @@
     {
         foreach (var post in Model)
         {
-            <label>@post.User!.UserName</label>
-            <label>@post.CreatedAt.ToShortDateString()</label>
-            <h4><a class="post-name" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
-            <p class="postContent">@post.Content</p>
+            <div>
+                <label>@post.User!.UserName</label>
+                @if (post.CreatedAt.Year == DateTime.Now.Year)
+                {
+                    <label>@post.CreatedAt.ToString("MMM d")</label>
+                }
+                else
+                {
+                    <label>@post.CreatedAt.ToString("MMM d, yyyy")</label>
+                }
+                <h4><a class="post-name" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
+                @if (post.Content.Length > 300)
+                {
+                    <p>@(string.Concat(post.Content!.Take(300)) + "...")</p>
+                }
+                else
+                {
+                    <p>@post.Content</p>
+                }
+                
+            </div>
         }
     }
     else
