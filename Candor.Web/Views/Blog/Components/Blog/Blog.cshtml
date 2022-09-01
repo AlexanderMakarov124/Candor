@@ -7,15 +7,22 @@
         foreach (var post in Model)
         {
             <div>
-                <label>@post.User!.UserName</label>
-                @if (post.CreatedAt.Year == DateTime.Now.Year)
-                {
-                    <label>@post.CreatedAt.ToString("MMM d")</label>
-                }
-                else
-                {
-                    <label>@post.CreatedAt.ToString("MMM d, yyyy")</label>
-                }
+                <div class="row">
+                    <div class="col-md-auto">
+                        <label>@post.User!.UserName</label>
+                    </div>
+
+                    <div class="col-md-auto">
+                        @if (post.CreatedAt.Year == DateTime.Now.Year)
+                        {
+                            <label>@post.CreatedAt.ToString("MMM d")</label>
+                        }
+                        else
+                        {
+                            <label>@post.CreatedAt.ToString("MMM d, yyyy")</label>
+                        }
+                    </div>
+                </div>
                 <h4><a class="post-name" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
                 @if (post.Content.Length > 300)
                 {
@@ -25,7 +32,7 @@
                 {
                     <p>@post.Content</p>
                 }
-                
+
             </div>
         }
     }

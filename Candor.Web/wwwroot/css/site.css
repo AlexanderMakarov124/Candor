@@ -100,3 +100,11 @@ div.dropdown-points {
 .post-content {
     white-space: pre-wrap;
 }
+
+.post-form-element {
+    width: 200%;
+}
+
+textarea.post-form-element {
+    height: 700px;
+}
