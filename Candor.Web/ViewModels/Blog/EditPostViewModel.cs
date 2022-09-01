@@ -1,17 +1,20 @@
-﻿namespace Candor.Web.ViewModels.Blog;
+﻿using System.ComponentModel.DataAnnotations;
+using Candor.Domain.Models;
+
+namespace Candor.Web.ViewModels.Blog;
 
 /// <summary>
 /// Edit post view model.
 /// </summary>
 public class EditPostViewModel
 {
-    /// <summary>
-    /// Title.
-    /// </summary>
+    /// <inheritdoc cref="Post.Title"/>
+    [Required]
+    [MaxLength(200)]
     public string? Title { get; init; }
 
-    /// <summary>
-    /// Content.
-    /// </summary>
+    /// <inheritdoc cref="Post.Content"/>
+    [Required]
+    [DataType(DataType.MultilineText)]
     public string? Content { get; init; }
 }

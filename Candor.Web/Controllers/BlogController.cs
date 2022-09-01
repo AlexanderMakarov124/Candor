@@ -72,16 +72,20 @@ public class BlogController : Controller
     [Authorize]
     public async Task<IActionResult> CreatePostAsync(CreatePostCommand command, CancellationToken cancellationToken)
     {
-        var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
-
-        command = command with
+        if (ModelState.IsValid)
         {
-            UserId = user.Id
-        };
+            var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
-        await mediator.Send(command, cancellationToken);
+            command = command with
+            {
+                UserId = user.Id
+            };
 
-        return RedirectToAction("UserBlog");
+            await mediator.Send(command, cancellationToken);
+
+            return RedirectToAction("UserBlog");
+        }
+        return View();
     }
 
     /// <summary>
@@ -136,14 +140,19 @@ public class BlogController : Controller
     [HttpPost("/Post/{id:int}/Edit")]
     public async Task<IActionResult> EditPostAsync(int id, [FromForm] EditPostViewModel viewModel, CancellationToken cancellationToken)
     {
-        var post = await mediator.Send(new FindPostByIdQuery(id), cancellationToken);
+        if (ModelState.IsValid)
+        {
+            var post = await mediator.Send(new FindPostByIdQuery(id), cancellationToken);
 
-        post.Title = viewModel.Title;
-        post.Content = viewModel.Content;
+            post.Title = viewModel.Title;
+            post.Content = viewModel.Content;
 
-        await mediator.Send(new EditPostCommand(post), cancellationToken);
+            await mediator.Send(new EditPostCommand(post), cancellationToken);
 
-        return LocalRedirect($"/Post/{id}");
+            return LocalRedirect($"/Post/{id}");
+        }
+
+        return View();
     }
 
     /// <summary>
