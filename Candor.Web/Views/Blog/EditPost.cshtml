@@ -17,6 +17,11 @@
             <textarea class="form-control create-post-content" asp-for="@Model.Content"></textarea>
             <span asp-validation-for="Content"></span>
         </div>
+        
+        <div class="form-check">
+            <input class="form-check-input" asp-for="IsPublic"/>
+            <label class="form-check-label" asp-for="IsPublic">Public</label>
+        </div>
 
         <button class="btn btn-success" type="submit">Save changes</button>
     </form>

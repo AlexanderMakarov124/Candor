@@ -17,4 +17,7 @@ public class EditPostViewModel
     [Required]
     [DataType(DataType.MultilineText)]
     public string? Content { get; init; }
+
+    /// <inheritdoc cref="Post.IsPublic"/>
+    public bool IsPublic { get; init; }
 }

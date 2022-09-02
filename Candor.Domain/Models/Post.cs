@@ -34,4 +34,9 @@ public class Post
     /// Id of user who owns the blog post.
     /// </summary>
     public virtual string? UserId { get; init; }
+
+    /// <summary>
+    /// If true, the post is visible to everyone, otherwise only to the user.
+    /// </summary>
+    public bool IsPublic { get; init; }
 }

@@ -21,4 +21,7 @@ public record CreatePostCommand : IRequest
 
     /// <inheritdoc cref="Post.UserId"/>
     public string? UserId { get; init; }
+
+    /// <inheritdoc cref="Post.IsPublic"/>
+    public bool IsPublic { get;init; }
 }
