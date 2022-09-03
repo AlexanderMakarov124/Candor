@@ -37,6 +37,8 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
             throw new NotFoundException("Post was not found");
         }
 
+        await db.Entry(post).Reference(p => p.User).LoadAsync(cancellationToken);
+
         logger.LogDebug("Post with id {Id} was retrieved.", request.Id);
 
         return post;

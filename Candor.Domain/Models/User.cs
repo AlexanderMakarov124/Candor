@@ -8,7 +8,7 @@ namespace Candor.Domain.Models;
 public class User : IdentityUser
 {
     /// <summary>
-    /// All posts made by a user.
+    /// All posts made by the user.
     /// </summary>
-    public virtual IEnumerable<Post>? Posts { get; init; }
+    public IEnumerable<Post>? Posts { get; init; }
 }

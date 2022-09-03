@@ -3,9 +3,10 @@
 :root {
     /* Colors. */
     --post-name-color: #212529;
-    --error-font-color: #f00;
+    --error-color: #f00;
     --inactive-color: #808080;
     --active-color: #000;
+
     /* Fonts. */
     --common-font-size: 20px;
     --light-bold: 600;
@@ -14,7 +15,6 @@
 nav {
     --nav-font-size: 20px;
     font-size: var(--nav-font-size);
-    padding-inline: 10%;
 }
 
 body {
@@ -48,7 +48,7 @@ body {
 }
 
 .field-validation-error {
-    color: var(--error-font-color);
+    color: var(--error-color);
 }
 
 .post-name {

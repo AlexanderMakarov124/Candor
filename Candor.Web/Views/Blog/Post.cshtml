@@ -4,7 +4,7 @@
 @model Candor.Domain.Models.Post
 
 @inject UserManager<User> UserManager
-@inject ApplicationContext db
+@inject ApplicationContext Db
 
 @{
     ViewData["Title"] = "Post";
@@ -78,7 +78,15 @@
     <h4 class="post-name">@Model.Title</h4>
     <p class="post-content">@Model.Content</p>
     @{
-        <label>Views: @(++Model.ViewsCount)</label>
-        await db.SaveChangesAsync();
+
+        <label>Views: @Model.ViewsCount</label>
+        @if (User.Identity!.IsAuthenticated)
+        {
+            <button type="button" onclick="Like(@Model.Id)">Like</button>
+        }
+        <label>Likes:</label>
+        <label id="likes">@Model.Likes</label>
+
+        await Db.SaveChangesAsync();
     }
 </div>

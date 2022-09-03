@@ -3,6 +3,7 @@ using Candor.Domain.Models;
 using Candor.UseCases.Authorization.Register;
 using Candor.Web.MappingProfiles;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
@@ -13,7 +14,6 @@ builder.Services.AddControllersWithViews();
 
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationContext>(options => options
-    .UseLazyLoadingProxies()
     .UseSqlServer(connection));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
@@ -35,14 +35,14 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    // options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-    // options.Cookie.Name = "YourAppCookieName";
-    // options.Cookie.HttpOnly = true;
-    // options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.Cookie.Name = "AuthCookie";
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
     options.LoginPath = "/Login";
 
-    // options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-    // options.SlidingExpiration = true;
+    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+    options.SlidingExpiration = true;
 });
 
 builder.Services.AddMediatR(typeof(RegisterCommand).Assembly);
@@ -77,5 +77,8 @@ app.Run();
 
 namespace Candor.Web
 {
-    public partial class Program { }
+    /// <inheritdoc />
+    public partial class Program
+    {
+    }
 }

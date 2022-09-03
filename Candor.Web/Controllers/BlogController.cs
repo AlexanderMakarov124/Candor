@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Candor.Domain.Models;
 using Candor.Infrastructure.Common.Exceptions;
 using Candor.UseCases.Authorization.GetCurrentUser;
 using Candor.UseCases.Blog.CreatePost;
@@ -105,6 +104,15 @@ public class BlogController : Controller
         {
             var post = await mediator.Send(new FindPostByIdQuery(id), cancellationToken);
 
+            if (!Request.Cookies.ContainsKey($"Post{id}Visited"))
+            {
+                post.ViewsCount++;
+
+                Response.Cookies.Append($"Post{id}Visited", "Visited", new CookieOptions
+                {
+                    Expires = DateTimeOffset.UtcNow.AddDays(30)
+                });
+            }
             return View(post);
         }
         catch (NotFoundException)
@@ -172,5 +180,37 @@ public class BlogController : Controller
         await mediator.Send(new DeletePostCommand(post), cancellationToken);
 
         return RedirectToAction("UserBlog");
+    }
+
+    /// <summary>
+    /// Increments likes on the post.
+    /// </summary>
+    /// <param name="id">Post id.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>Content with likes.</returns>
+    [HttpPut("/Like")]
+    public async Task<IActionResult> LikeAsync(int id, CancellationToken cancellationToken)
+    {
+        var post = await mediator.Send(new FindPostByIdQuery(id), cancellationToken);
+
+        if (Request.Cookies.ContainsKey($"Post{id}Liked"))
+        {
+            post.Likes--;
+
+            Response.Cookies.Delete($"Post{id}Liked");
+        }
+        else
+        {
+            post.Likes++;
+
+            Response.Cookies.Append($"Post{id}Liked", "Liked", new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddYears(1)
+            });
+        }
+
+        await mediator.Send(new EditPostCommand(post), cancellationToken);
+
+        return Content(post.Likes.ToString());
     }
 }

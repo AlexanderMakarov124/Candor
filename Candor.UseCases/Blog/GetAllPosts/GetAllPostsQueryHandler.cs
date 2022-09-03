@@ -26,7 +26,7 @@ internal class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, IEnum
     /// <inheritdoc />
     public async Task<IEnumerable<Post>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
     {
-        var posts = await db.Posts.ToListAsync(cancellationToken);
+        var posts = await db.Posts.Include(post => post.User).ToListAsync(cancellationToken);
 
         logger.LogDebug("All posts was retrieved");
 

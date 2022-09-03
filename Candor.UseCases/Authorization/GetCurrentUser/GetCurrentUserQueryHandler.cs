@@ -1,4 +1,5 @@
-﻿using Candor.Domain.Models;
+﻿using Candor.DataAccess;
+using Candor.Domain.Models;
 using Candor.Infrastructure.Common.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +15,7 @@ internal class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery,
     private readonly ILogger<GetCurrentUserQueryHandler> logger;
     private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
+    private readonly ApplicationContext db;
 
     /// <summary>
     /// Constructor.
@@ -21,12 +23,14 @@ internal class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery,
     public GetCurrentUserQueryHandler(
         ILogger<GetCurrentUserQueryHandler> logger,
         UserManager<User> userManager,
-        SignInManager<User> signInManager
+        SignInManager<User> signInManager,
+        ApplicationContext db
         )
     {
         this.logger = logger;
         this.userManager = userManager;
         this.signInManager = signInManager;
+        this.db = db;
     }
 
     /// <inheritdoc />
@@ -41,6 +45,8 @@ internal class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery,
 
             throw new NotFoundException(errorMessage);
         }
+
+        await db.Entry(user).Collection(u => u.Posts!).LoadAsync(cancellationToken);
 
         logger.LogDebug("Current user was retrieved");
 

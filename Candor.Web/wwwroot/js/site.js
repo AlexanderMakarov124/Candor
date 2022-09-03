@@ -3,3 +3,21 @@ var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggl
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl);
 });
+
+/**
+ * Increments likes of the post.
+ * @param {int} id Post id.
+ */
+function Like(id) {
+    $.ajax({
+        url: '/Like',
+        type: 'PUT',
+        data: { id },
+        success: function (response) {
+            $('#likes').html(response);
+        },
+        error: function () {
+            alert('Error occurred while like');
+        }
+    });
+}

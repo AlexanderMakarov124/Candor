@@ -28,12 +28,12 @@ public class Post
     /// <summary>
     /// User who owns the blog post.
     /// </summary>
-    public virtual User? User { get; init; }
+    public User? User { get; init; }
 
     /// <summary>
     /// Id of user who owns the blog post.
     /// </summary>
-    public virtual string? UserId { get; init; }
+    public string? UserId { get; init; }
 
     /// <summary>
     /// If true, the post is visible to everyone, otherwise only to the user.
@@ -44,4 +44,9 @@ public class Post
     /// Describes how many times the post has been visited.
     /// </summary>
     public int ViewsCount { get; set; }
+
+    /// <summary>
+    /// Count of likes.
+    /// </summary>
+    public int Likes { get; set; }
 }
