@@ -21,7 +21,7 @@ public class Post
     public string? Content { get; set; }
 
     /// <summary>
-    /// The date when a post was created.
+    /// The date when the post was created.
     /// </summary>
     public DateTime CreatedAt { get; init; }
 
@@ -39,4 +39,9 @@ public class Post
     /// If true, the post is visible to everyone, otherwise only to the user.
     /// </summary>
     public bool IsPublic { get; init; }
+
+    /// <summary>
+    /// Describes how many times the post has been visited.
+    /// </summary>
+    public int ViewsCount { get; set; }
 }

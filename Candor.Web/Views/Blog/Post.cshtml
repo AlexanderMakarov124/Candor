@@ -1,53 +1,54 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Candor.Domain.Models
+@using Candor.DataAccess
 @model Candor.Domain.Models.Post
 
 @inject UserManager<User> UserManager
+@inject ApplicationContext db
 
 @{
     ViewData["Title"] = "Post";
 }
 
 <div class="post">
+    <div class="row">
+        <div class="col-md-auto">
+            <label>@Model.User!.UserName</label>
+        </div>
+
+        <div class="col-md-auto">
+            @if (Model.CreatedAt.Year == DateTime.Now.Year)
+            {
+                <label>@Model.CreatedAt.ToString("MMM d")</label>
+            }
+            else
+            {
+                <label>@Model.CreatedAt.ToString("MMM d, yyyy")</label>
+            }
+        </div>
+
     @if (await UserManager.GetUserAsync(User) == Model.User)
     {
-        <div class="row">
-            <div class="col-md-auto">
-                <label>@Model.User!.UserName</label>
+        <div class="dropdown col-md-auto">
+            <div class="dropdown-points" data-bs-toggle="dropdown" id="postActions" aria-expanded="false">
+                <svg class="dropdown-points dropdown-toggle"
+                 data-bs-container="body"
+                 data-bs-toggle="popover"
+                 data-bs-trigger="hover focus"
+                 data-bs-placement="top"
+                 data-bs-content="Actions"
+                 xmlns="http://www.w3.org/2000/svg">
+
+                    <circle cx="10" cy="10" r="2" />
+                    <circle cx="16" cy="10" r="2" />
+                    <circle cx="22" cy="10" r="2" />
+                </svg>
             </div>
 
-            <div class="col-md-auto">
-                @if (Model.CreatedAt.Year == DateTime.Now.Year)
-                {
-                    <label>@Model.CreatedAt.ToString("MMM d")</label>
-                }
-                else
-                {
-                    <label>@Model.CreatedAt.ToString("MMM d, yyyy")</label>
-                }
-            </div>
-
-            <div class="dropdown col-md-auto">
-                <div class="dropdown-points" data-bs-toggle="dropdown" id="postActions" aria-expanded="false">
-                    <svg class="dropdown-points dropdown-toggle"
-                     data-bs-container="body"
-                     data-bs-toggle="popover"
-                     data-bs-trigger="hover focus"
-                     data-bs-placement="top"
-                     data-bs-content="Actions"
-                     xmlns="http://www.w3.org/2000/svg">
-
-                        <circle cx="10" cy="10" r="2" />
-                        <circle cx="16" cy="10" r="2" />
-                        <circle cx="22" cy="10" r="2" />
-                    </svg>
-                </div>
-
-                <ul class="dropdown-menu" aria-labelledby="postActions">
-                    <li><a class="dropdown-item" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a></li>
-                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
-                </ul>
-            </div>
+            <ul class="dropdown-menu" aria-labelledby="postActions">
+                <li><a class="dropdown-item" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
+            </ul>
         </div>
 
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -72,18 +73,12 @@
             </div>
         </div>
     }
-    else
-    {
-        <label>@Model.User!.UserName</label>
-        @if (Model.CreatedAt.Year == DateTime.Now.Year)
-        {
-            <label>@Model.CreatedAt.ToString("MMM d")</label>
-        }
-        else
-        {
-            <label>@Model.CreatedAt.ToString("MMM d, yyyy")</label>
-        }
-    }
+
+    </div>
     <h4 class="post-name">@Model.Title</h4>
     <p class="post-content">@Model.Content</p>
+    @{
+        <label>Views: @(++Model.ViewsCount)</label>
+        await db.SaveChangesAsync();
+    }
 </div>
