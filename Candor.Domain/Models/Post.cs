@@ -13,12 +13,12 @@ public class Post
     /// <summary>
     /// Title.
     /// </summary>
-    public string? Title { get; set; }
+    public string Title { get; set; }
 
     /// <summary>
     /// Content.
     /// </summary>
-    public string? Content { get; set; }
+    public string Content { get; set; }
 
     /// <summary>
     /// The date when the post was created.
@@ -28,12 +28,12 @@ public class Post
     /// <summary>
     /// User who owns the blog post.
     /// </summary>
-    public User? User { get; init; }
+    public User User { get; init; }
 
     /// <summary>
     /// Id of user who owns the blog post.
     /// </summary>
-    public string? UserId { get; init; }
+    public string UserId { get; init; }
 
     /// <summary>
     /// If true, the post is visible to everyone, otherwise only to the user.
@@ -49,4 +49,9 @@ public class Post
     /// Count of likes.
     /// </summary>
     public int Likes { get; set; }
+
+    /// <summary>
+    /// Comments to the post.
+    /// </summary>
+    public ICollection<Comment> Comments { get; init; }
 }

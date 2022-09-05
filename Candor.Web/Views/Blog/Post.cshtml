@@ -1,10 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Candor.Domain.Models
-@using Candor.DataAccess
 @model Candor.Domain.Models.Post
 
 @inject UserManager<User> UserManager
-@inject ApplicationContext Db
 
 @{
     ViewData["Title"] = "Post";
@@ -86,4 +84,32 @@
     }
     <label>Likes:</label>
     <label id="likes">@Model.Likes</label>
+    <label>Comments:</label>
+    <label>@Model.Comments.Count</label>
+    
+    <div>
+        <form method="post" asp-action="CreateComment" asp-route-postId="@Model.Id">
+            <label>Make a comment:</label>
+            <textarea class="form-control" name="Content"></textarea>
+            
+            <button class="btn btn-primary" type="submit">Create</button>
+        </form>
+    </div>
+
+    @if (Model.Comments.Any())
+    {
+        <div>
+            @foreach (var comment in Model.Comments)
+            {
+                <label>@comment.User.UserName</label>
+                <label>@comment.CreatedAt</label>
+                <p>@comment.Content</p>
+                <button>Reply</button>
+            }
+        </div>
+    }
+    else
+    {
+        <label>Comments are empty.</label>
+    }
 </div>

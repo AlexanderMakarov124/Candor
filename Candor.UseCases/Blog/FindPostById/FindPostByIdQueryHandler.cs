@@ -2,6 +2,7 @@
 using Candor.Domain.Models;
 using Candor.Infrastructure.Common.Exceptions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Candor.UseCases.Blog.FindPostById;
@@ -38,6 +39,7 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
         }
 
         await db.Entry(post).Reference(p => p.User).LoadAsync(cancellationToken);
+        await db.Entry(post).Collection(p => p.Comments).Query().Include(c => c.User).Include(c => c.Replies).LoadAsync(cancellationToken);
 
         logger.LogDebug("Post with id {Id} was retrieved.", request.Id);
 

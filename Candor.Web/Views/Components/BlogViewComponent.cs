@@ -9,7 +9,7 @@ namespace Candor.Web.Views.Components;
 public class BlogViewComponent : ViewComponent
 {
     /// <summary>
-    /// Invokes component.
+    /// Invokes a component.
     /// </summary>
     /// <param name="posts">Blog posts.</param>
     /// <returns>View with posts.</returns>

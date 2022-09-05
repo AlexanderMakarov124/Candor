@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Candor.Infrastructure.Common.Exceptions;
 using Candor.UseCases.Authorization.GetCurrentUser;
+using Candor.UseCases.Blog.CreateComment;
 using Candor.UseCases.Blog.CreatePost;
 using Candor.UseCases.Blog.DeletePost;
 using Candor.UseCases.Blog.EditPost;
@@ -214,5 +215,29 @@ public class BlogController : Controller
         await mediator.Send(new EditPostCommand(post), cancellationToken);
 
         return Content(post.Likes.ToString());
+    }
+
+    /// <summary>
+    /// Creates comment.
+    /// </summary>
+    /// <param name="postId">Post id.</param>
+    /// <param name="command">Create comment command.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>Redirect to post.</returns>
+    public async Task<IActionResult> CreateComment(int postId, [FromForm] CreateCommentCommand command, CancellationToken cancellationToken)
+    {
+        var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
+
+        var post = await mediator.Send(new FindPostByIdQuery(postId), cancellationToken);
+
+        command = command with
+        {
+            User = user,
+            Post = post
+        };
+
+        await mediator.Send(command, cancellationToken);
+
+        return LocalRedirect($"/Post/{postId}");
     }
 }

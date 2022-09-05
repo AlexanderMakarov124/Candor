@@ -20,4 +20,9 @@ public class ApplicationContext : IdentityDbContext<User>
     /// Posts DB set.
     /// </summary>
     public DbSet<Post> Posts { get; protected set; }
+
+    /// <summary>
+    /// Comments DB set.
+    /// </summary>
+    public DbSet<Comment> Comments { get; protected set; }
 }
