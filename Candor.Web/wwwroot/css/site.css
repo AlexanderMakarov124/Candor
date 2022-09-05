@@ -108,3 +108,8 @@ div.dropdown-points {
 textarea.post-form-element {
     height: 700px;
 }
+
+.like-button {
+    border: 0;
+    background: transparent;
+}

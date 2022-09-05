@@ -77,16 +77,13 @@
     </div>
     <h4 class="post-name">@Model.Title</h4>
     <p class="post-content">@Model.Content</p>
-    @{
-
-        <label>Views: @Model.ViewsCount</label>
-        @if (User.Identity!.IsAuthenticated)
-        {
-            <button type="button" onclick="Like(@Model.Id)">Like</button>
-        }
-        <label>Likes:</label>
-        <label id="likes">@Model.Likes</label>
-
-        await Db.SaveChangesAsync();
+    <label>Views: @Model.ViewsCount</label>
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <button class="like-button" type="button" onclick="Like(@Model.Id)">
+            <img width="25" height="25" src="/img/like-icon.svg" alt="Like" />
+        </button>
     }
+    <label>Likes:</label>
+    <label id="likes">@Model.Likes</label>
 </div>

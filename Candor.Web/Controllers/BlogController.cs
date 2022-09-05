@@ -112,6 +112,8 @@ public class BlogController : Controller
                 {
                     Expires = DateTimeOffset.UtcNow.AddDays(30)
                 });
+
+                await mediator.Send(new EditPostCommand(post), cancellationToken);
             }
             return View(post);
         }
