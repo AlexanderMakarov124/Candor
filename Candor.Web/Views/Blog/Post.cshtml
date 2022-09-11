@@ -25,54 +25,55 @@
             }
         </div>
 
-    @if (await UserManager.GetUserAsync(User) == Model.User)
-    {
-        <div class="dropdown col-md-auto">
-            <div class="dropdown-points" data-bs-toggle="dropdown" id="postActions" aria-expanded="false">
-                <svg class="dropdown-points dropdown-toggle"
-                 data-bs-container="body"
-                 data-bs-toggle="popover"
-                 data-bs-trigger="hover focus"
-                 data-bs-placement="top"
-                 data-bs-content="Actions"
-                 xmlns="http://www.w3.org/2000/svg">
+        @if (await UserManager.GetUserAsync(User) == Model.User)
+        {
+            <div class="dropdown col-md-auto">
+                <div class="dropdown-points" data-bs-toggle="dropdown" id="postActions" aria-expanded="false">
+                    <svg class="dropdown-points dropdown-toggle"
+                     data-bs-container="body"
+                     data-bs-toggle="popover"
+                     data-bs-trigger="hover focus"
+                     data-bs-placement="top"
+                     data-bs-content="Actions"
+                     xmlns="http://www.w3.org/2000/svg">
 
-                    <circle cx="10" cy="10" r="2" />
-                    <circle cx="16" cy="10" r="2" />
-                    <circle cx="22" cy="10" r="2" />
-                </svg>
+                        <circle cx="10" cy="10" r="2" />
+                        <circle cx="16" cy="10" r="2" />
+                        <circle cx="22" cy="10" r="2" />
+                    </svg>
+                </div>
+
+                <ul class="dropdown-menu" aria-labelledby="postActions">
+                    <li><a class="dropdown-item" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
+                </ul>
             </div>
 
-            <ul class="dropdown-menu" aria-labelledby="postActions">
-                <li><a class="dropdown-item" asp-action="EditPost" asp-route-id="@Model.Id">Edit</a></li>
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a></li>
-            </ul>
-        </div>
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete post</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
 
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Delete post</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+                        <div class="modal-body">
+                            Do you really want to delete this post?
+                        </div>
 
-                    <div class="modal-body">
-                        Do you really want to delete this post?
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <form method="post" asp-action="DeletePost" asp-route-id="@Model.Id">
-                            <button type="submit" class="btn btn-primary">Delete</button>
-                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form method="post" asp-action="DeletePost" asp-route-id="@Model.Id">
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
+        }
 
     </div>
+
     <h4 class="post-name">@Model.Title</h4>
     <p class="post-content">@Model.Content</p>
     <label>Views: @Model.ViewsCount</label>
@@ -84,32 +85,81 @@
     }
     <label>Likes:</label>
     <label id="likes">@Model.Likes</label>
-    <label>Comments:</label>
+    <label class="comments-label" onclick="showComments()">Comments:</label>
     <label>@Model.Comments.Count</label>
-    
-    <div>
-        <form method="post" asp-action="CreateComment" asp-route-postId="@Model.Id">
-            <label>Make a comment:</label>
-            <textarea class="form-control" name="Content"></textarea>
-            
-            <button class="btn btn-primary" type="submit">Create</button>
-        </form>
-    </div>
 
-    @if (Model.Comments.Any())
-    {
+    <div id="comments" hidden>
         <div>
-            @foreach (var comment in Model.Comments)
-            {
-                <label>@comment.User.UserName</label>
-                <label>@comment.CreatedAt</label>
-                <p>@comment.Content</p>
-                <button>Reply</button>
-            }
+            <form method="post" asp-action="CreateComment" asp-route-postId="@Model.Id">
+                <label>Make a comment:</label>
+                <textarea class="form-control comment-content" name="Content"></textarea>
+
+                <button class="btn btn-primary" type="submit">Create</button>
+            </form>
         </div>
-    }
-    else
-    {
-        <label>Comments are empty.</label>
-    }
+
+        @{
+            var padding = -50;
+            async Task RenderComments(IEnumerable<Comment> comments)
+            {
+                padding += 50;
+                var paddingString = $"padding-left:{padding}px";
+
+                <div style=@paddingString>
+                    @foreach (var comment in comments)
+                    {
+                        <div>
+                        <label>@comment.User.UserName</label>
+                        <label>@comment.CreatedAt</label>
+                        <p>@comment.Content</p>
+                        <button class="btn btn-secondary" onclick="showReply(@comment.Id)">Reply</button>
+
+                        <div id="reply-@comment.Id" hidden>
+                            <form method="post" asp-action="CreateComment" asp-route-PostId="@Model.Id" asp-route-CommentId="@comment.Id">
+                                <textarea class="form-control comment-content" name="Content" placeholder="Make reply"></textarea>
+
+                                <button class="btn btn-primary" type="submit">Respond</button>
+                            </form>
+                        </div>
+
+                        @if (comment.Replies != null)
+                        {
+                            await RenderComments(comment.Replies);
+                        }
+                        </div>
+                    }
+                </div>
+            }
+        }
+
+        @if (Model.Comments.Any())
+        {
+            await RenderComments(Model.Comments);
+        }
+        else
+        {
+            <label>Comments are empty.</label>
+        }
+    </div>
 </div>
+
+<script>
+    function showComments() {
+        const comments = document.getElementById('comments');
+        if (comments.hidden) {
+            comments.hidden = false;
+        } else {
+            comments.hidden = true;
+        }
+    }
+
+    function showReply(id) {
+        const reply = document.getElementById(`reply-${id}`);
+
+        if (reply.hidden) {
+            reply.hidden = false;
+        } else {
+            reply.hidden = true;
+        }
+    }
+</script>

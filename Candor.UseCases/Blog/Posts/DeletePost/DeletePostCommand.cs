@@ -1,7 +1,7 @@
 ﻿using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.DeletePost;
+namespace Candor.UseCases.Blog.Posts.DeletePost;
 
 /// <summary>
 /// Delete post command.

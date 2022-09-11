@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Candor.UseCases.Blog.FindPostById;
+namespace Candor.UseCases.Blog.Posts.FindPostById;
 
 /// <summary>
 /// Find post by id query handler.
@@ -27,9 +27,7 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
     /// <inheritdoc />
     public async Task<Post> Handle(FindPostByIdQuery request, CancellationToken cancellationToken)
     {
-#pragma warning disable CA2016 // Forward the 'CancellationToken' parameter to methods
         var post = await db.Posts.FindAsync(request.Id);
-#pragma warning restore CA2016 // Forward the 'CancellationToken' parameter to methods
 
         if (post == null)
         {
@@ -39,7 +37,13 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
         }
 
         await db.Entry(post).Reference(p => p.User).LoadAsync(cancellationToken);
-        await db.Entry(post).Collection(p => p.Comments).Query().Include(c => c.User).Include(c => c.Replies).LoadAsync(cancellationToken);
+        await db.Entry(post)
+            .Collection(p => p.Comments)
+            .Query()
+            .Include(c => c.User)
+            .Include(c => c.Replies)
+            .ThenInclude(r => r.Replies)
+            .LoadAsync(cancellationToken);
 
         logger.LogDebug("Post with id {Id} was retrieved.", request.Id);
 

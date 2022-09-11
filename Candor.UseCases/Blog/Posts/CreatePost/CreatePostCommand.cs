@@ -2,7 +2,7 @@
 using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.CreatePost;
+namespace Candor.UseCases.Blog.Posts.CreatePost;
 
 /// <summary>
 /// Create post command.

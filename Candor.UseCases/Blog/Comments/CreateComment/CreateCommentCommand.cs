@@ -1,7 +1,7 @@
 ﻿using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.CreateComment;
+namespace Candor.UseCases.Blog.Comments.CreateComment;
 
 /// <summary>
 /// Command that creates comment.
@@ -22,4 +22,9 @@ public record CreateCommentCommand : IRequest
     /// The comment will be created by this user.
     /// </summary>
     public User? User { get; init; }
+
+    /// <summary>
+    /// The comment is reply to this comment. If null this comment is not reply.
+    /// </summary>
+    public Comment? CommentReply { get; init; }
 }

@@ -26,7 +26,12 @@ public class Comment
     public DateTime CreatedAt { get; init; }
 
     /// <summary>
+    /// The comment is reply to this comment. If null this comment is not reply.
+    /// </summary>
+    public Comment CommentReply { get; init; }
+
+    /// <summary>
     /// Replies to the comment.
     /// </summary>
-    public IEnumerable<Comment> Replies { get; init; }
+    public ICollection<Comment> Replies { get; init; }
 }

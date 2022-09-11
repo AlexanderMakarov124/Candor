@@ -4,7 +4,7 @@ using Candor.Domain.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Candor.UseCases.Blog.CreatePost;
+namespace Candor.UseCases.Blog.Posts.CreatePost;
 
 /// <summary>
 /// Create post command handler.

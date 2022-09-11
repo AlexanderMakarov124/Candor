@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace Candor.UseCases.Blog.GetAllPosts;
+namespace Candor.UseCases.Blog.Posts.GetAllPosts;
 
 /// <summary>
 /// Get all posts query handler.

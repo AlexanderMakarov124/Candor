@@ -1,7 +1,7 @@
 ﻿using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.FindPostById;
+namespace Candor.UseCases.Blog.Posts.FindPostById;
 
 /// <summary>
 /// Find post by id query.

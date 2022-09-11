@@ -1,7 +1,7 @@
 ﻿using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.EditPost;
+namespace Candor.UseCases.Blog.Posts.EditPost;
 
 /// <summary>
 /// Edit post command.

@@ -4,7 +4,7 @@ using Candor.Domain.Models;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Candor.UseCases.Blog.CreateComment;
+namespace Candor.UseCases.Blog.Comments.CreateComment;
 
 /// <summary>
 /// Create comment command handler.
@@ -30,14 +30,20 @@ internal class CreateCommentCommandHandler : AsyncRequestHandler<CreateCommentCo
     {
         var comment = mapper.Map<Comment>(request);
 
-        // await db.Comments.AddAsync(comment, cancellationToken);
-
         var post = request.Post;
 
-        post!.Comments.Add(comment);
-        db.Update(post);
+        if (request.CommentReply == null)
+        {
+            post!.Comments.Add(comment);
+            db.Update(post);
+        }
+        else
+        {
+            request.CommentReply.Replies.Add(comment);
+        }
+
         await db.SaveChangesAsync(cancellationToken);
 
-        logger.LogDebug("Comment was created to the post with id {Id}", post.Id);
+        logger.LogDebug("Comment was created to the post with id {Id}", post!.Id);
     }
 }

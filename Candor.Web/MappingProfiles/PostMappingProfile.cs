@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Candor.Domain.Models;
-using Candor.UseCases.Blog.CreatePost;
+using Candor.UseCases.Blog.Posts.CreatePost;
 using Candor.Web.ViewModels.Blog;
 
 namespace Candor.Web.MappingProfiles;

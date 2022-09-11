@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
 using Candor.Infrastructure.Common.Exceptions;
 using Candor.UseCases.Authorization.GetCurrentUser;
-using Candor.UseCases.Blog.CreateComment;
-using Candor.UseCases.Blog.CreatePost;
-using Candor.UseCases.Blog.DeletePost;
-using Candor.UseCases.Blog.EditPost;
-using Candor.UseCases.Blog.FindPostById;
-using Candor.UseCases.Blog.GetAllPosts;
+using Candor.UseCases.Blog.Comments.CreateComment;
+using Candor.UseCases.Blog.Comments.FindCommentById;
+using Candor.UseCases.Blog.Posts.CreatePost;
+using Candor.UseCases.Blog.Posts.DeletePost;
+using Candor.UseCases.Blog.Posts.EditPost;
+using Candor.UseCases.Blog.Posts.FindPostById;
+using Candor.UseCases.Blog.Posts.GetAllPosts;
 using Candor.Web.ViewModels.Blog;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -220,15 +221,26 @@ public class BlogController : Controller
     /// <summary>
     /// Creates comment.
     /// </summary>
-    /// <param name="postId">Post id.</param>
+    /// <param name="viewModel">View model.</param>
     /// <param name="command">Create comment command.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Redirect to post.</returns>
-    public async Task<IActionResult> CreateComment(int postId, [FromForm] CreateCommentCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateComment(CreateCommentViewModel viewModel, [FromForm] CreateCommentCommand command, CancellationToken cancellationToken)
     {
         var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
+        var postId = viewModel.PostId;
+
         var post = await mediator.Send(new FindPostByIdQuery(postId), cancellationToken);
+
+        if (viewModel.CommentId != default)
+        {
+            var comment = await mediator.Send(new FindCommentByIdQuery(viewModel.CommentId), cancellationToken);
+            command = command with
+            {
+                CommentReply = comment
+            };
+        }
 
         command = command with
         {

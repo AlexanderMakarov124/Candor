@@ -1,7 +1,7 @@
 ﻿using Candor.Domain.Models;
 using MediatR;
 
-namespace Candor.UseCases.Blog.GetAllPosts;
+namespace Candor.UseCases.Blog.Posts.GetAllPosts;
 
 /// <summary>
 /// Get all posts query.

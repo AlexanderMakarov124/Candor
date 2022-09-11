@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace Candor.UseCases.Blog.DeletePost;
+namespace Candor.UseCases.Blog.Posts.DeletePost;
 
 /// <summary>
 /// Delete post command handler.

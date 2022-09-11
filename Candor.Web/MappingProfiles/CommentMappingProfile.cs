@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Candor.Domain.Models;
-using Candor.UseCases.Blog.CreateComment;
+using Candor.UseCases.Blog.Comments.CreateComment;
 
 namespace Candor.Web.MappingProfiles;
 

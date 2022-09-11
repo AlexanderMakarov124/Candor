@@ -6,6 +6,7 @@
     --error-color: #f00;
     --inactive-color: #808080;
     --active-color: #000;
+    --link-color: #0000ff;
 
     /* Fonts. */
     --common-font-size: 20px;
@@ -112,4 +113,15 @@ textarea.post-form-element {
 .like-button {
     border: 0;
     background: transparent;
+}
+
+.comments-label {
+    text-decoration: underline;
+    color: var(--link-color);
+    cursor: pointer;
+}
+
+.comment-content {
+    width: 50%;
+    height: 200px;
 }

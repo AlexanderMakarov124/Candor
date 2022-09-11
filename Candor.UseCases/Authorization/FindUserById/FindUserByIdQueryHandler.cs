@@ -17,7 +17,7 @@ internal class FindUserByIdQueryHandler : IRequestHandler<FindUserByIdQuery, Use
     /// <summary>
     /// Constructor.
     /// </summary>
-    public FindUserByIdQueryHandler( ILogger<FindUserByIdQueryHandler> logger, UserManager<User> userManager)
+    public FindUserByIdQueryHandler(ILogger<FindUserByIdQueryHandler> logger, UserManager<User> userManager)
     {
         this.logger = logger;
         this.userManager = userManager;
