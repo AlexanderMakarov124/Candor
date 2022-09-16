@@ -99,10 +99,10 @@
         </div>
 
         @{
-            var padding = -50;
+            var padding = 0;
             async Task RenderComments(IEnumerable<Comment> comments)
             {
-                padding += 50;
+                padding += 10;
                 var paddingString = $"padding-left:{padding}px";
 
                 <div style=@paddingString>

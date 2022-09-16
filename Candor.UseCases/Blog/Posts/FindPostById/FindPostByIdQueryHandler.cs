@@ -37,16 +37,50 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
         }
 
         await db.Entry(post).Reference(p => p.User).LoadAsync(cancellationToken);
-        await db.Entry(post)
-            .Collection(p => p.Comments)
-            .Query()
-            .Include(c => c.User)
-            .Include(c => c.Replies)
-            .ThenInclude(r => r.Replies)
-            .LoadAsync(cancellationToken);
+        //await db.Entry(post)
+        //    .Collection(p => p.Comments)
+        //    .Query()
+        //    .Include(c => c.User)
+        //    .Include(c => c.Replies)
+        //    .ThenInclude(r => r.Replies)
+        //    .LoadAsync(cancellationToken);
+
+        //var include = db.Entry(post)
+        //    .Collection(p => p.Comments)
+        //    .Query()
+        //    .Include(c => c.User)
+        //    .Include(c => c.Replies)
+        //    .ThenInclude(r => r.Replies);
+
+        //var include2 = db.Entry(post)
+        //    .Collection(p => p.Comments)
+        //    .Query()
+        //    .Where(x => x.Replies.Any())
+        //    .Include(c => c.User)
+        //    .Include(c => c.Replies.Where(r => r.Replies.Any()))
+        //    .ThenInclude(r => r.Replies.Where(r => r.Replies.Any()))
+        //    .ThenInclude(r => r.Replies);
+
+        await db.Entry(post).Collection(p => p.Comments).LoadAsync(cancellationToken);
+
+        await LoadAllRelatedRepliesAsync(post.Comments, cancellationToken);
 
         logger.LogDebug("Post with id {Id} was retrieved.", request.Id);
 
         return post;
+    }
+
+    private async Task LoadAllRelatedRepliesAsync(IEnumerable<Comment> comments, CancellationToken cancellationToken)
+    {
+        foreach (var reply in comments)
+        {
+            await db.Entry(reply).Reference(r => r.User).LoadAsync(cancellationToken);
+            await db.Entry(reply).Collection(r => r.Replies).LoadAsync(cancellationToken);
+
+            if (reply.Replies.Any())
+            {
+                await LoadAllRelatedRepliesAsync(reply.Replies, cancellationToken);
+            }
+        }
     }
 }
