@@ -2,7 +2,6 @@
 using Candor.Domain.Models;
 using Candor.Infrastructure.Common.Exceptions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Candor.UseCases.Blog.Posts.FindPostById;
@@ -37,29 +36,6 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
         }
 
         await db.Entry(post).Reference(p => p.User).LoadAsync(cancellationToken);
-        //await db.Entry(post)
-        //    .Collection(p => p.Comments)
-        //    .Query()
-        //    .Include(c => c.User)
-        //    .Include(c => c.Replies)
-        //    .ThenInclude(r => r.Replies)
-        //    .LoadAsync(cancellationToken);
-
-        //var include = db.Entry(post)
-        //    .Collection(p => p.Comments)
-        //    .Query()
-        //    .Include(c => c.User)
-        //    .Include(c => c.Replies)
-        //    .ThenInclude(r => r.Replies);
-
-        //var include2 = db.Entry(post)
-        //    .Collection(p => p.Comments)
-        //    .Query()
-        //    .Where(x => x.Replies.Any())
-        //    .Include(c => c.User)
-        //    .Include(c => c.Replies.Where(r => r.Replies.Any()))
-        //    .ThenInclude(r => r.Replies.Where(r => r.Replies.Any()))
-        //    .ThenInclude(r => r.Replies);
 
         await db.Entry(post).Collection(p => p.Comments).LoadAsync(cancellationToken);
 
