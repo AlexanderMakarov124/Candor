@@ -70,19 +70,22 @@ public class BlogController : Controller
     /// <summary>
     /// POST: Creates post.
     /// </summary>
-    /// <param name="command">Create post command.</param>
+    /// <param name="viewModel">Create post view model.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Redirect to user's blog.</returns>
     [HttpPost("/CreatePost")]
     [Authorize]
-    public async Task<IActionResult> CreatePostAsync(CreatePostCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreatePostAsync(CreatePostViewModel viewModel, CancellationToken cancellationToken)
     {
         if (ModelState.IsValid)
         {
             var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
-            command = command with
+            var command = new CreatePostCommand
             {
+                Title = viewModel.Title,
+                Content = viewModel.Content,
+                IsPublic = viewModel.IsPublic,
                 UserId = user.Id
             };
 
@@ -221,17 +224,23 @@ public class BlogController : Controller
     /// <summary>
     /// Creates comment.
     /// </summary>
-    /// <param name="viewModel">View model.</param>
-    /// <param name="command">Create comment command.</param>
+    /// <param name="viewModel">Create comment view model.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Redirect to post.</returns>
-    public async Task<IActionResult> CreateComment(CreateCommentViewModel viewModel, [FromForm] CreateCommentCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateComment(CreateCommentViewModel viewModel, CancellationToken cancellationToken)
     {
         var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
         var postId = viewModel.PostId;
 
         var post = await mediator.Send(new FindPostByIdQuery(postId), cancellationToken);
+
+        var command = new CreateCommentCommand
+        {
+            User = user,
+            Post = post,
+            Content = viewModel.Content
+        };
 
         if (viewModel.CommentId != default)
         {
@@ -241,12 +250,6 @@ public class BlogController : Controller
                 CommentReply = comment
             };
         }
-
-        command = command with
-        {
-            User = user,
-            Post = post
-        };
 
         await mediator.Send(command, cancellationToken);
 

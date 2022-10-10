@@ -14,4 +14,9 @@ public class CreateCommentViewModel
     /// Replied comment id.
     /// </summary>
     public int CommentId { get; init; }
+
+    /// <summary>
+    /// Comment content.
+    /// </summary>
+    public string? Content { get; init; }
 }
