@@ -14,6 +14,16 @@
     <div class="col-md-auto">
         <a class="btn btn-primary" asp-action="CreatePost">Create post</a>
     </div>
+    <div class="col-md-auto">
+        <fieldset>
+            <label>All</label>
+            <input type="radio" name="privacy" value="all" checked/>
+            <label>Private</label>
+            <input type="radio" name="privacy" value="private" />
+            <label>Public</label>
+            <input type="radio" name="privacy" value="public" />
+        </fieldset>
+    </div>
 </div>
 
-@await Component.InvokeAsync("Blog", new { posts = Model })
+@await Component.InvokeAsync("Blog", new { posts = Model, isPublic })
