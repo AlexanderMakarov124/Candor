@@ -32,7 +32,7 @@ internal class FindPostByIdQueryHandler : IRequestHandler<FindPostByIdQuery, Pos
         {
             logger.LogError("Post with id {Id} does not exist.", request.Id);
 
-            throw new NotFoundException("Post was not found");
+            throw new NotFoundException($"Post with id {request.Id} does not exist.");
         }
 
         await db.Entry(post).Reference(p => p.User).LoadAsync(cancellationToken);

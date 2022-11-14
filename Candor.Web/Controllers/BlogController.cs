@@ -93,6 +93,7 @@ public class BlogController : Controller
 
             return RedirectToAction("UserBlog");
         }
+
         return View();
     }
 
@@ -174,7 +175,7 @@ public class BlogController : Controller
     }
 
     /// <summary>
-    /// DELETE: Delete post.
+    /// POST: Delete post.
     /// </summary>
     /// <param name="id">Post id.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
@@ -190,7 +191,7 @@ public class BlogController : Controller
     }
 
     /// <summary>
-    /// Increments likes on the post.
+    /// PUT: Increments likes on the post.
     /// </summary>
     /// <param name="id">Post id.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>

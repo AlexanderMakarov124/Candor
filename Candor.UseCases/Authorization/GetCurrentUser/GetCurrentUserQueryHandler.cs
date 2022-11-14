@@ -40,7 +40,7 @@ internal class GetCurrentUserQueryHandler : IRequestHandler<GetCurrentUserQuery,
 
         if (user == null)
         {
-            const string errorMessage = "Current user does not exist.";
+            const string errorMessage = "Current user does not exist";
             logger.LogError(errorMessage);
 
             throw new NotFoundException(errorMessage);
