@@ -6,7 +6,7 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 
 /**
  * Increments likes of the post.
- * @param {int} id Post id.
+ * @param {number} id Post id.
  */
 function Like(id) {
     $.ajax({
@@ -18,6 +18,24 @@ function Like(id) {
         },
         error: function () {
             alert('Error occurred while like');
+        }
+    });
+}
+
+/**
+ * Load user's posts.
+ * @param {boolean} isPublic Privacy of posts.
+ */
+function LoadPosts(isPublic) {
+    $.ajax({
+        url: '/Posts',
+        type: 'GET',
+        data: { isPublic },
+        success: function(response) {
+            $('#postsTest').load(this.url);
+        },
+        error: function() {
+            alert('Error occurred while loading posts.');
         }
     });
 }

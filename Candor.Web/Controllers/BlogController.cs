@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Candor.Domain.Models;
 using Candor.Infrastructure.Common.Exceptions;
 using Candor.UseCases.Authorization.GetCurrentUser;
 using Candor.UseCases.Blog.Comments.CreateComment;
@@ -9,6 +10,7 @@ using Candor.UseCases.Blog.Posts.EditPost;
 using Candor.UseCases.Blog.Posts.FindPostById;
 using Candor.UseCases.Blog.Posts.GetAllPosts;
 using Candor.Web.ViewModels.Blog;
+using Candor.Web.Views.Components;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,11 +51,9 @@ public class BlogController : Controller
     /// <returns>View.</returns>
     [HttpGet("/Blog")]
     [Authorize]
-    public async Task<IActionResult> UserBlogAsync(CancellationToken cancellationToken)
+    public IActionResult UserBlog()
     {
-        var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
-
-        return View(user.Posts!.OrderByDescending(post => post.CreatedAt));
+        return View();
     }
 
     /// <summary>
@@ -255,5 +255,28 @@ public class BlogController : Controller
         await mediator.Send(command, cancellationToken);
 
         return LocalRedirect($"/Post/{postId}");
+    }
+
+    /// <summary>
+    /// GET: Get user's posts.
+    /// </summary>
+    /// <param name="isPublic">Privacy of the posts.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
+    /// <returns>All posts if <c>isPublic</c> is null. Otherwise depends on <c>isPublic</c>.</returns>
+    [HttpGet("/Posts")]
+    public async Task<IActionResult> GetPosts(bool? isPublic, CancellationToken cancellationToken)
+    {
+        var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
+
+        var posts = user.Posts;
+
+        if (isPublic != null)
+        {
+            posts = posts.Where(p => p.IsPublic == isPublic);
+        }
+
+        posts = posts.OrderByDescending(post => post.CreatedAt);
+
+        return ViewComponent(nameof(Blog), new { posts });
     }
 }

@@ -6,7 +6,7 @@ namespace Candor.Web.Views.Components;
 /// <summary>
 /// Blog view component.
 /// </summary>
-public class BlogViewComponent : ViewComponent
+public class Blog : ViewComponent
 {
     /// <summary>
     /// Invokes a component.
@@ -15,6 +15,6 @@ public class BlogViewComponent : ViewComponent
     /// <returns>View with posts.</returns>
     public IViewComponentResult Invoke(IEnumerable<Post> posts)
     {
-        return View("Blog", posts);
+        return View(nameof(Blog), posts);
     }
 }

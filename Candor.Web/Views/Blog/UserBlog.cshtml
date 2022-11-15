@@ -17,13 +17,23 @@
     <div class="col-md-auto">
         <fieldset>
             <label>All</label>
-            <input type="radio" name="privacy" value="all" checked/>
+            <input type="radio" name="privacy" value="all" onclick="LoadPosts(null)" checked/>
             <label>Private</label>
-            <input type="radio" name="privacy" value="private" />
+            <input type="radio" name="privacy" value="private" onclick="LoadPosts(false)"/>
             <label>Public</label>
-            <input type="radio" name="privacy" value="public" />
+            <input type="radio" name="privacy" value="public" onclick="LoadPosts(true)"/>
         </fieldset>
     </div>
 </div>
 
-@await Component.InvokeAsync("Blog", new { posts = Model })
+<div id="postsTest">
+
+</div>
+
+@section Scripts{
+    <script>
+
+        LoadPosts(null);
+    
+    </script>
+}
