@@ -30,8 +30,7 @@ public class BlogController : Controller
     /// </summary>
     public BlogController(IMediator mediator, IMapper mapper)
     {
-        this.mediator = mediator;
-        this.mapper = mapper;
+        (this.mediator, this.mapper) = (mediator, mapper); // Deconstructing assignment
     }
 
     /// <summary>
