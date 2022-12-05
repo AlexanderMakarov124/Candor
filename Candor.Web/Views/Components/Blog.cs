@@ -1,4 +1,5 @@
 ﻿using Candor.Domain.Models;
+using Candor.Infrastructure.Common.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Candor.Web.Views.Components;
@@ -13,7 +14,7 @@ public class Blog : ViewComponent
     /// </summary>
     /// <param name="posts">Blog posts.</param>
     /// <returns>View with posts.</returns>
-    public IViewComponentResult Invoke(IEnumerable<Post> posts)
+    public IViewComponentResult Invoke(PaginatedList<Post> posts)
     {
         return View(nameof(Blog), posts);
     }

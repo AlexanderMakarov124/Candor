@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Candor.Domain.Models;
 using Candor.Infrastructure.Common.Exceptions;
+using Candor.Infrastructure.Common.Utilities;
 using Candor.UseCases.Authorization.GetCurrentUser;
 using Candor.UseCases.Blog.Comments.CreateComment;
 using Candor.UseCases.Blog.Comments.FindCommentById;
@@ -14,6 +15,7 @@ using Candor.Web.Views.Components;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Candor.Web.Controllers;
 
@@ -22,6 +24,8 @@ namespace Candor.Web.Controllers;
 /// </summary>
 public class BlogController : Controller
 {
+    private const int PageSize = 10;
+
     private readonly IMediator mediator;
     private readonly IMapper mapper;
 
@@ -36,12 +40,18 @@ public class BlogController : Controller
     /// <summary>
     /// Main page.
     /// </summary>
+    /// <param name="pageNumber">Page number, used for pagination.</param>
+    /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>View.</returns>
-    public async Task<IActionResult> IndexAsync(CancellationToken cancellationToken)
+    public async Task<IActionResult> IndexAsync(int? pageNumber, CancellationToken cancellationToken)
     {
         var posts = await mediator.Send(new GetAllPostsQuery(), cancellationToken);
 
-        return View(posts.Where(post => post.IsPublic).OrderByDescending(post => post.CreatedAt));
+        posts = posts.Where(post => post.IsPublic).OrderByDescending(post => post.CreatedAt);
+
+        var paginatedPosts = PaginatedList<Post>.Create(posts, pageNumber ?? 1, PageSize);
+
+        return View(paginatedPosts);
     }
 
     /// <summary>
@@ -261,18 +271,19 @@ public class BlogController : Controller
     /// </summary>
     /// <param name="isPublic">Public privacy of the posts.</param>
     /// <param name="isPrivate">Private privacy of the posts.</param>
+    /// <param name="pageNumber">Page number, used for pagination.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
     /// <returns>Posts depends on privacy.</returns>
     [HttpGet("/Posts")]
-    public async Task<IActionResult> GetPosts(bool isPublic, bool isPrivate, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetPosts(bool isPublic, bool isPrivate, int? pageNumber, CancellationToken cancellationToken)
     {
         var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
-        var posts = user.Posts;
+        var posts = user.Posts.AsQueryable();
 
         if (!isPublic && !isPrivate)
         {
-            posts = Enumerable.Empty<Post>();
+            posts = posts.Take(0);
         }
         else if (isPublic && !isPrivate)
         {
@@ -285,6 +296,8 @@ public class BlogController : Controller
 
         posts = posts.OrderByDescending(post => post.CreatedAt);
 
-        return ViewComponent(nameof(Blog), new { posts });
+        var paginatedPosts = PaginatedList<Post>.Create(posts, pageNumber ?? 1, PageSize);
+
+        return ViewComponent(nameof(Blog), new { posts = paginatedPosts });
     }
 }

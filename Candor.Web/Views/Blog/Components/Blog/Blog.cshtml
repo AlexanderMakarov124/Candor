@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Candor.Domain.Models.Post>
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Candor.Infrastructure.Common.Utilities.PaginatedList<Candor.Domain.Models.Post>
 
 
 <div class="blog">
@@ -35,6 +37,28 @@
                 }
             </div>
         }
+
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+
+        var currentAction = ViewContext.RouteData.Values["action"];
+
+        if (currentAction!.Equals("GetPosts"))
+        {
+            currentAction = "UserBlog";
+        }
+
+        <a asp-action="@currentAction"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+
+        <a asp-action="@currentAction"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
     }
     else
     {

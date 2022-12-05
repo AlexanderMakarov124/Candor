@@ -6,4 +6,4 @@ namespace Candor.UseCases.Blog.Posts.GetAllPosts;
 /// <summary>
 /// Get all posts query.
 /// </summary>
-public record GetAllPostsQuery : IRequest<IEnumerable<Post>>;
+public record GetAllPostsQuery : IRequest<IQueryable<Post>>;

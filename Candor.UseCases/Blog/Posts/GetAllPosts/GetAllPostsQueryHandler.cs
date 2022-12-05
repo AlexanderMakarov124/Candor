@@ -9,7 +9,7 @@ namespace Candor.UseCases.Blog.Posts.GetAllPosts;
 /// <summary>
 /// Get all posts query handler.
 /// </summary>
-internal class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, IEnumerable<Post>>
+internal class GetAllPostsQueryHandler : RequestHandler<GetAllPostsQuery, IQueryable<Post>>
 {
     private readonly ILogger<GetAllPostsQueryHandler> logger;
     private readonly ApplicationContext db;
@@ -24,9 +24,9 @@ internal class GetAllPostsQueryHandler : IRequestHandler<GetAllPostsQuery, IEnum
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<Post>> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
+    protected override IQueryable<Post> Handle(GetAllPostsQuery request)
     {
-        var posts = await db.Posts.Include(post => post.User).ToListAsync(cancellationToken);
+        var posts = db.Posts.Include(post => post.User).Select(p => p);
 
         logger.LogDebug("All posts was retrieved");
 
