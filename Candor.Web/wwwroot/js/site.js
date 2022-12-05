@@ -24,13 +24,15 @@ function Like(id) {
 
 /**
  * Load user's posts.
- * @param {boolean} isPublic Privacy of posts.
  */
-function LoadPosts(isPublic) {
+function LoadPosts() {
+    const isPublic = document.getElementById('public').checked;
+    const isPrivate = document.getElementById('private').checked;
+
     $.ajax({
         url: '/Posts',
         type: 'GET',
-        data: { isPublic },
+        data: { isPublic, isPrivate },
         success: function(response) {
             $('#postsTest').load(this.url);
         },

@@ -259,19 +259,28 @@ public class BlogController : Controller
     /// <summary>
     /// GET: Get user's posts.
     /// </summary>
-    /// <param name="isPublic">Privacy of the posts.</param>
+    /// <param name="isPublic">Public privacy of the posts.</param>
+    /// <param name="isPrivate">Private privacy of the posts.</param>
     /// <param name="cancellationToken">Token to cancel the operation.</param>
-    /// <returns>All posts if <c>isPublic</c> is null. Otherwise depends on <c>isPublic</c>.</returns>
+    /// <returns>Posts depends on privacy.</returns>
     [HttpGet("/Posts")]
-    public async Task<IActionResult> GetPosts(bool? isPublic, CancellationToken cancellationToken)
+    public async Task<IActionResult> GetPosts(bool isPublic, bool isPrivate, CancellationToken cancellationToken)
     {
         var user = await mediator.Send(new GetCurrentUserQuery(), cancellationToken);
 
         var posts = user.Posts;
 
-        if (isPublic != null)
+        if (!isPublic && !isPrivate)
+        {
+            posts = Enumerable.Empty<Post>();
+        }
+        else if (isPublic && !isPrivate)
         {
             posts = posts.Where(p => p.IsPublic == isPublic);
+        }
+        else if (!isPublic && isPrivate)
+        {
+            posts = posts.Where(p => p.IsPublic == !isPrivate);
         }
 
         posts = posts.OrderByDescending(post => post.CreatedAt);
